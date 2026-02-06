@@ -41,4 +41,18 @@ Bash
 # 启动本地协议环境
 cd Shensist-LATT-Protocol
 python3 -m http.server 5500
+
+# SHENSIST-LATT-PROTOCOL v2026
+## 神思智能体：本地私有化决策协议
+
+> **STATUS**: ACTIVE
+> **IDENTITY**: AI 山海造物主
+> **CORE**: 40年逻辑积淀 (1986-2026)
+
+### 快速启动
+1. **环境准备**: Ubuntu 22.04+ / Python 3.10+
+2. **部署内核**: 
+   ```bash
+   git clone [https://github.com/jinv2/Shensist-LATT-Protocol.git](https://github.com/jinv2/Shensist-LATT-Protocol.git)
+   cd Shensist-LATT-Protocol
 Focus on what matters. 2026 Shensist.top. All Rights Reserved.
