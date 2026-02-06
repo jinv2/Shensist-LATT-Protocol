@@ -47,51 +47,69 @@
         .btn-dim { border-color: var(--protocol); color: var(--protocol); }
         .btn-dim:hover { background: var(--protocol); color: var(--bg); }
 
+        /* 为第一个按钮添加"算力呼吸"动画 */
+        @keyframes brain-pulse {
+            0% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+            50% { box-shadow: 0 0 25px rgba(255,255,255,0.4); } /* 微弱的光晕 */
+            100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+        }
+
+        .btn-main {
+            background: #fff; 
+            color: #000; 
+            animation: brain-pulse 4s infinite ease-in-out; /* 4秒一次的深呼吸 */
+        }
+
         .footer { position: absolute; bottom: -30px; left: 0; font-size: 8px; color: var(--protocol); }
     </style>
 </head>
-<body>
+<body style="margin: 0; padding: 0; background: #000; color: #fff; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
-    <div class="bg-overlay">
-        SHENSIST LOGIC 1986 2026 LATT LEVERAGE AI ENHANCE TRIM TARGET 
-        SHENSIST LOGIC 1986 2026 LATT LEVERAGE AI ENHANCE TRIM TARGET
-        (此处重复千次，象征 40 年积淀的数字底座...)
+    <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
+        <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
     </div>
 
-    <div class="protocol-frame">
-        <div class="header">
-            <h1>SHENSIST</h1>
-            <div class="sub-header">L-A-T-T Protocol v.2026</div>
-        </div>
+    <div style="width: 90%; max-width: 500px; text-align: center;">
+        
+        <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
 
-        <div class="latt-definition">
-            <b>L</b>everage | <b>A</b>I Enhance | <b>T</b>rim | <b>T</b>arget<br>
-            基于私有算力的逻辑坍缩协议。拒绝 Web 冗余，只输出最终路径。
-        </div>
+        <div style="display: flex; flex-direction: column; gap: 35px;">
+            
+            <div style="margin-bottom: 10px;">
+                <a href="https://github.com/jinv2/deepfocus-agent/releases/tag/v1.0.0" target="_blank" 
+                   style="display: block; background: #fff; color: #000; text-decoration: none; padding: 18px; font-weight: bold; letter-spacing: 8px; font-size: 16px; box-shadow: 0 0 20px rgba(255,255,255,0.1);">
+                    获 取 神 思 智 能 体
+                </a>
+                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 私有化决策内核 / V1.0.0 稳定版 ]</p>
+            </div>
 
-        <div class="entry-point">
-            <a href="https://github.com/jinv2/deepfocus-agent" class="btn">DEPLOY AGENT<span> (Local DeepSeek)</span></a>
-            <div style="position: relative;">
-    <a href="https://www.moltbook.com/u/Shensist_Agent" 
-       id="moltbook-link"
-       style="text-decoration: none; color: #fff; font-size: 12px; border: 1px solid #fff; padding: 15px; text-align: center; letter-spacing: 2px; transition: 0.3s; display: block; background: rgba(255,255,255,0.02);" 
-       onmouseover="this.style.background='#fff'; this.style.color='#000'; document.getElementById('molt-hash').style.color='#fff';" 
-       onmouseout="this.style.background='transparent'; this.style.color='#fff'; document.getElementById('molt-hash').style.color='#333';"
-       onclick="alert('逻辑载入中... AUTH_STATE: VERIFIED');">
-        VERIFY IDENTITY (Moltbook)
-    </a>
-    
-    <div id="molt-hash" style="font-size: 8px; color: #333; font-family: monospace; margin-top: 5px; text-align: center; letter-spacing: 1px; transition: 0.3s;">
-        SHA-256: 40Y-SHENSIST-COLLAPSE-2026-LOGIC-SECURED
+            <div style="margin-bottom: 10px;">
+                <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank"
+                   style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
+                   onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">
+                    查 验 神 思 庭 的 机 器 人
+                </a>
+                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 唯一认证分身 / 跨界逻辑源头 ]</p>
+            </div>
+
+            <div style="margin-bottom: 10px;">
+                <a href="https://shensist.top/" target="_blank"
+                   style="display: block; border: 1px solid #222; color: #888; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
+                   onmouseover="this.style.color='#fff'; this.style.borderColor='#444'" onmouseout="this.style.color='#888'; this.style.borderColor='#222'">
+                    探 寻 40 年 逻 辑 积 淀
+                </a>
+                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 1986-2026 文学、艺术、科技全记录 ]</p>
+            </div>
+
+        </div>
     </div>
-</div>
-            <a href="#" class="btn btn-dim" onclick="alert('Accessing 40-Year Synergy Repository...')">COLLECTION<span> (1986-2026)</span></a>
-        </div>
 
-        <div class="footer">
-            RUNNING ON UBUNTU / H410M / PRIVATE KERNEL
-        </div>
+    <div style="position: absolute; bottom: 5vh; text-align: center; width: 100%; opacity: 0.5;">
+        <p style="font-size: 10px; color: #666; letter-spacing: 3px; margin: 0 0 8px 0;">神 思 庭 · AI 山 海 造 物 主</p>
+        <p style="font-size: 9px; color: #444; letter-spacing: 1px; margin: 0 0 15px 0;">微信联络：Shensi-ST</p>
+        <div style="font-size: 8px; color: #222; letter-spacing: 1px;">© 2026 SHENSIST.TOP</div>
     </div>
 
+    <script src="https://ai-master-dashboard.netlify.app/inject-telemetry.js"></script>
 </body>
 </html>
