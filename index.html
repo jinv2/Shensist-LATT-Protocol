@@ -71,7 +71,20 @@
 
         <div class="entry-point">
             <a href="https://github.com/jinv2/deepfocus-agent" class="btn">DEPLOY AGENT<span> (Local DeepSeek)</span></a>
-            <a href="https://www.moltbook.com/u/Shensist_Agent" class="btn">VERIFY IDENTITY<span> (Moltbook)</span></a>
+            <div style="position: relative;">
+    <a href="https://www.moltbook.com/u/Shensist_Agent" 
+       id="moltbook-link"
+       style="text-decoration: none; color: #fff; font-size: 12px; border: 1px solid #fff; padding: 15px; text-align: center; letter-spacing: 2px; transition: 0.3s; display: block; background: rgba(255,255,255,0.02);" 
+       onmouseover="this.style.background='#fff'; this.style.color='#000'; document.getElementById('molt-hash').style.color='#fff';" 
+       onmouseout="this.style.background='transparent'; this.style.color='#fff'; document.getElementById('molt-hash').style.color='#333';"
+       onclick="alert('逻辑载入中... AUTH_STATE: VERIFIED');">
+        VERIFY IDENTITY (Moltbook)
+    </a>
+    
+    <div id="molt-hash" style="font-size: 8px; color: #333; font-family: monospace; margin-top: 5px; text-align: center; letter-spacing: 1px; transition: 0.3s;">
+        SHA-256: 40Y-SHENSIST-COLLAPSE-2026-LOGIC-SECURED
+    </div>
+</div>
             <a href="#" class="btn btn-dim" onclick="alert('Accessing 40-Year Synergy Repository...')">COLLECTION<span> (1986-2026)</span></a>
         </div>
 
