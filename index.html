@@ -92,42 +92,50 @@
     transition: all 0.3s ease;
 }
 
-/* --- 2. 手机端"看不清"专项放大逻辑 --- */
 @media (max-width: 768px) {
-    /* 整体容器：减少边距，让内容占满屏幕 */
+    /* 1. 容器：取消固定边距，强制撑开 */
     .container {
-        width: 90%;
-        gap: 50px; /* 增加按钮之间的"呼吸间距" */
+        width: 95%;          /* 占据屏幕 95% 的宽度 */
+        max-width: none;
+        padding: 0 10px;
+        gap: 6vh;            /* 使用视口高度单位，增加上下间距 */
     }
 
-    /* 标题：显著加粗放大 */
+    /* 2. 主标题：神思智能体 - 满屏拉伸 */
     h1 {
-        font-size: 2.2rem;
-        letter-spacing: 8px;
-        margin-bottom: 40px;
+        font-size: 8.5vw;    /* 使用 vw (视口宽度单位)，字随屏宽自动变大 */
+        font-weight: 900;
+        letter-spacing: 1.5vw;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap; /* 强制不换行，实现横向撑满 */
     }
 
-    /* 按钮：加高、加粗、边框加厚 */
+    /* 3. 按钮组：获取神思智能体 / 探寻40年... */
     .btn {
-        padding: 22px 30px; /* 极大的点击区域 */
-        font-size: 1.25rem;  /* 字体调大，确保一眼看清 */
-        font-weight: 800;    /* 极端加粗 */
-        border-width: 2px;   /* 边框加厚 */
-        letter-spacing: 5px;
-        width: 100%;         /* 按钮横向撑满 */
+        width: 100%;         /* 按钮横向铺满 */
+        padding: 24px 0;     /* 增加高度，提升触摸质感 */
+        font-size: 5.5vw;    /* 字体随屏幕宽度缩放 */
+        font-weight: 800;
+        border-width: 2px;
+        letter-spacing: 2vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    /* 副标题：变亮，变大 */
+    /* 4. 副标题：1986-2026... - 更加清晰可见 */
     .subtitle {
-        font-size: 0.9rem;
-        font-weight: 400;
-        opacity: 0.8;       /* 增加不透明度，防止看不清 */
+        font-size: 3.8vw;    /* 辅助信息也随屏幕自适应 */
+        font-weight: 500;
+        opacity: 0.9;        /* 提升亮度，确保手机上能看清 */
         margin-top: 15px;
+        letter-spacing: 1px;
     }
 
-    /* Logo 手机端也放大 */
+    /* 5. Logo 尺寸微调，配合满屏视觉 */
     .site-logo img {
-        width: 52px;
+        width: 55px;
     }
 }
 
