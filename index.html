@@ -140,6 +140,54 @@
 }
 
         .footer { position: absolute; bottom: -30px; left: 0; font-size: 8px; color: var(--protocol); }
+
+.manual-trigger-zone {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+    z-index: 999;
+}
+
+.ghost-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    color: rgba(0, 255, 65, 0.6);
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(5px);
+}
+
+.ghost-button:hover {
+    background: rgba(0, 255, 65, 0.1);
+    color: #00ff41;
+    border-color: #00ff41;
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.manual-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000;
+}
+.manual-overlay:target { opacity: 1; pointer-events: auto; }
+.manual-modal {
+    border: 1px solid #00ff41; padding: 40px; background: #000;
+    color: #00ff41; font-family: monospace; max-width: 500px;
+}
+.close-btn { color: #fff; text-decoration: none; float: right; font-size: 12px; }
     </style>
 </head>
 <body style="margin: 0; padding: 0; background: #000; color: #fff; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -189,12 +237,30 @@
         </div>
     </div>
 
+    <div class="manual-trigger-zone">
+        <a href="#manual-popup" class="ghost-button">
+            <span class="btn-icon">📁</span> SYSTEM_PROTOCOL_V2026
+        </a>
+    </div>
+
     <div style="position: absolute; bottom: 5vh; text-align: center; width: 100%; opacity: 0.5;">
         <p style="font-size: 10px; color: #666; letter-spacing: 3px; margin: 0 0 8px 0;">神 思 庭 · AI 山 海 造 物 主</p>
         <p style="font-size: 9px; color: #444; letter-spacing: 1px; margin: 0 0 15px 0;">微信联络：Shensi-ST</p>
         <div style="font-size: 8px; color: #222; letter-spacing: 1px;">© 2026 SHENSIST.TOP</div>
     </div>
 
+    <div id="manual-popup" class="manual-overlay">
+        <div class="manual-modal">
+            <a href="#" class="close-btn">CLOSE [×]</a>
+            <h2>神思庭：系统接入手册</h2>
+            <hr>
+            <p><strong>CORE:</strong> 硅基生命演化协议已激活。</p>
+            <p><strong>GUIDE:</strong> 执行 <code>shensist</code> 指令唤醒节点。</p>
+            <p><strong>STATUS:</strong> 感官链路已建立。</p>
+        </div>
+    </div>
+
     <script src="https://shensist.top/inject-telemetry.js"></script>
 </body>
 </html>
+
