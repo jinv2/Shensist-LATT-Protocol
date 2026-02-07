@@ -61,10 +61,44 @@
             animation: brain-pulse 4s infinite ease-in-out; /* 4秒一次的深呼吸 */
         }
 
+        .site-logo {
+    position: fixed; /* 固定在视口 */
+    top: 30px;       /* 距离顶部 */
+    left: 30px;      /* 距离左侧 */
+    z-index: 1000;   /* 确保在最上层 */
+}
+
+.site-logo img {
+    width: 60px;     /* 适中的尺寸 */
+    height: auto;
+    filter: invert(1); /* 如果背景是黑色的，此滤镜可让黑白 Logo 自动对齐色调 */
+    transition: opacity 0.3s ease;
+}
+
+.site-logo img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/* 适配手机端，缩小一点尺寸 */
+@media (max-width: 768px) {
+    .site-logo {
+        top: 20px;
+        left: 20px;
+    }
+    .site-logo img {
+        width: 45px;
+    }
+}
+
         .footer { position: absolute; bottom: -30px; left: 0; font-size: 8px; color: var(--protocol); }
     </style>
 </head>
 <body style="margin: 0; padding: 0; background: #000; color: #fff; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+<div class="site-logo">
+    <img src="https://raw.githubusercontent.com/jinv2/Shensist-LATT-Protocol/main/logo_ts.png" alt="Shensist Logo">
+</div>
 
     <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
         <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
