@@ -76,11 +76,41 @@
     filter: invert(1);
 }
 
-/* 手机端微信适配 */
+/* 📱 手机端深度自适应优化 */
 @media (max-width: 768px) {
+    /* 1. 放大 Logo，增强主权感 */
     .site-logo {
-        top: 15px;
-        left: 15px;
+        top: 20px;
+        left: 20px;
+    }
+    .site-logo img {
+        width: 42px; /* 从 26px 放大到 42px */
+    }
+
+    /* 2. 调整容器间距，防止按钮太挤 */
+    .container {
+        padding: 0 30px; /* 增加左右边距，让按钮变窄长，更高级 */
+        gap: 40px;       /* 增加按钮组之间的垂直间距 */
+    }
+
+    /* 3. 增大文字和按钮点击区域 */
+    .btn {
+        padding: 18px 25px; /* 增加内边距，方便手指点击 */
+        font-size: 1.1rem;   /* 稍微加大字号 */
+        letter-spacing: 4px; /* 增加字间距，提升精致感 */
+    }
+
+    /* 4. 副标题加亮 */
+    .subtitle {
+        font-size: 0.75rem;
+        margin-top: 12px;
+        opacity: 0.6; /* 稍微调亮一点，方便阅读 */
+    }
+
+    /* 5. 底部信息上移 */
+    .footer {
+        bottom: 30px;
+        font-size: 0.7rem;
     }
 }
 
