@@ -69,34 +69,18 @@
     z-index: 9999;
 }
 
-/* Logo 核心样式：参考 Sora 的精致比例 */
+/* Logo 缩小至 32px，且在微信黑底模式下自动反色 */
 .site-logo img {
-    width: 32px;            /* 关键：大幅缩小至 32px，极致精炼 */
-    height: auto;
-    display: block;
-    
-    /* 核心功能：根据背景自动反色 */
-    /* 当背景是黑色时，它会自动处理白色像素，反之亦然 */
-    filter: invert(1);      /* 如果原图是黑色，加上这个它在黑底上就是白色 */
-    mix-blend-mode: difference; /* 高级：与背景产生差值，实现智能色感 */
-    
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.85;
+    width: 32px;
+    mix-blend-mode: difference;
+    filter: invert(1);
 }
 
-.site-logo img:hover {
-    transform: scale(1.1); /* 悬浮时轻微放大 */
-    opacity: 1;
-}
-
-/* 📱 3. 手机端自适应调整 */
+/* 手机端微信适配 */
 @media (max-width: 768px) {
     .site-logo {
         top: 15px;
         left: 15px;
-    }
-    .site-logo img {
-        width: 26px; /* 手机端进一步缩小，保持空气感 */
     }
 }
 
@@ -139,7 +123,7 @@
             </div>
 
             <div style="margin-bottom: 10px;">
-                <a href="https://shensist-portal.netlify.app/" target="_blank"
+                <a href="https://agent.shensist.top/" target="_blank"
                    style="display: block; border: 1px solid #222; color: #888; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
                    onmouseover="this.style.color='#fff'; this.style.borderColor='#444'" onmouseout="this.style.color='#888'; this.style.borderColor='#222'">
                     探 寻 40 年 逻 辑 积 淀
