@@ -8,7 +8,6 @@
         :root { --bg: #000; --fg: #fff; --dim: #333; --protocol: #666; }
         body { background: var(--bg); color: var(--fg); font-family: 'Inter', 'Courier New', monospace; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
         
-        /* 协议背景：矩阵式全屏逻辑水印 */
         .bg-overlay { 
             position: absolute; top: 0; left: 0; width: 200%; height: 100%; 
             font-size: 10px; color: #080808; line-height: 1.5; 
@@ -24,243 +23,171 @@
             100% { transform: translateX(-50%); }
         }
 
-        .protocol-frame { 
-            position: relative; z-index: 10; width: 400px; padding: 40px; 
-            border: 1px solid var(--protocol); background: rgba(0,0,0,0.9);
-            box-shadow: 0 0 50px rgba(255,255,255,0.05);
-        }
-
-        .header { border-bottom: 1px solid var(--protocol); padding-bottom: 20px; margin-bottom: 30px; }
-        h1 { font-size: 18px; letter-spacing: 6px; margin: 0; font-weight: 300; }
-        .sub-header { font-size: 9px; color: var(--protocol); margin-top: 5px; text-transform: uppercase; }
-
-        .latt-definition { font-size: 11px; color: var(--protocol); margin-bottom: 30px; line-height: 1.6; }
-        .latt-definition b { color: var(--fg); font-weight: 400; }
-
-        .entry-point { display: flex; flex-direction: column; gap: 20px; }
-        .btn { 
-            text-decoration: none; color: var(--fg); font-size: 12px; 
-            border: 1px solid var(--fg); padding: 12px; transition: 0.3s; 
-            text-align: center; letter-spacing: 2px;
-        }
-        .btn:hover { background: var(--fg); color: var(--bg); font-weight: bold; }
-        
-        .btn-dim { border-color: var(--protocol); color: var(--protocol); }
-        .btn-dim:hover { background: var(--protocol); color: var(--bg); }
-
-        /* 为第一个按钮添加"算力呼吸"动画 */
         @keyframes brain-pulse {
             0% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 25px rgba(255,255,255,0.4); } /* 微弱的光晕 */
+            50% { box-shadow: 0 0 25px rgba(255,255,255,0.4); }
             100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
         }
 
         .btn-main {
             background: #fff; 
             color: #000; 
-            animation: brain-pulse 4s infinite ease-in-out; /* 4秒一次的深呼吸 */
+            animation: brain-pulse 4s infinite ease-in-out;
+            display: block;
+            text-decoration: none;
+            padding: 18px;
+            font-weight: bold;
+            letter-spacing: 8px;
+            font-size: 16px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
-        /* Logo 容器：固定位置与层级 */
-.site-logo {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    z-index: 9999;
-}
+        .site-logo {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 9999;
+            background: transparent; 
+        }
 
-/* --- 1. LOGO 智能反色逻辑 (像苹果启动一样) --- */
-.site-logo {
-    position: fixed;
-    top: 25px;
-    left: 25px;
-    z-index: 9999;
-    /* 核心：确保容器背景透明 */
-    background: transparent; 
-}
+        .site-logo img {
+            width: 48px;
+            height: auto;
+            display: block;
+            mix-blend-mode: screen; 
+            filter: brightness(1.5);
+            transition: all 0.3s ease;
+        }
 
-.site-logo img {
-    width: 48px; /* 进一步稍微放大，确保清晰 */
-    height: auto;
-    display: block;
+        .manual-trigger-zone {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            z-index: 999;
+        }
 
-    /* 核心：mix-blend-mode: screen 或 lighten 能滤掉黑色背景，只留白色花朵。
-       配合 filter: invert(1)，无论网页背景变黑变白，LOGO 背景都会与网页融为一体。
-    */
-    mix-blend-mode: screen; 
-    filter: brightness(1.5); /* 增加亮度，让花朵在黑底上更剔透 */
-    transition: all 0.3s ease;
-}
+        .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            color: rgba(0, 255, 65, 0.6);
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+        }
 
-@media (max-width: 768px) {
-    /* 1. 容器：取消固定边距，强制撑开 */
-    .container {
-        width: 95%;          /* 占据屏幕 95% 的宽度 */
-        max-width: none;
-        padding: 0 10px;
-        gap: 6vh;            /* 使用视口高度单位，增加上下间距 */
-    }
-
-    /* 2. 主标题：神思智能体 - 满屏拉伸 */
-    h1 {
-        font-size: 8.5vw;    /* 使用 vw (视口宽度单位)，字随屏宽自动变大 */
-        font-weight: 900;
-        letter-spacing: 1.5vw;
-        width: 100%;
-        text-align: center;
-        white-space: nowrap; /* 强制不换行，实现横向撑满 */
-    }
-
-    /* 3. 按钮组：获取神思智能体 / 探寻40年... */
-    .btn {
-        width: 100%;         /* 按钮横向铺满 */
-        padding: 24px 0;     /* 增加高度，提升触摸质感 */
-        font-size: 5.5vw;    /* 字体随屏幕宽度缩放 */
-        font-weight: 800;
-        border-width: 2px;
-        letter-spacing: 2vw;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* 4. 副标题：1986-2026... - 更加清晰可见 */
-    .subtitle {
-        font-size: 3.8vw;    /* 辅助信息也随屏幕自适应 */
-        font-weight: 500;
-        opacity: 0.9;        /* 提升亮度，确保手机上能看清 */
-        margin-top: 15px;
-        letter-spacing: 1px;
-    }
-
-    /* 5. Logo 尺寸微调，配合满屏视觉 */
-    .site-logo img {
-        width: 55px;
-    }
-}
-
-        .footer { position: absolute; bottom: -30px; left: 0; font-size: 8px; color: var(--protocol); }
-
-.manual-trigger-zone {
-    position: fixed;
-    bottom: 30px;
-    right: 40px;
-    z-index: 999;
-}
-
-.ghost-button {
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 15px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    color: rgba(0, 255, 65, 0.6);
-    text-decoration: none;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(5px);
-}
-
-.ghost-button:hover {
-    background: rgba(0, 255, 65, 0.1);
-    color: #00ff41;
-    border-color: #00ff41;
-    box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-    transform: translateY(-2px);
-}
-
-.btn-icon {
-    margin-right: 8px;
-    font-size: 14px;
-}
-
-.manual-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000;
-}
-.manual-overlay:target { opacity: 1; pointer-events: auto; }
-.manual-modal {
-    border: 1px solid #00ff41; padding: 40px; background: #000;
-    color: #00ff41; font-family: monospace; max-width: 500px;
-}
-.close-btn { color: #fff; text-decoration: none; float: right; font-size: 12px; }
+        .manual-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000;
+        }
+        .manual-overlay:target { opacity: 1; pointer-events: auto; }
+        .manual-modal {
+            border: 1px solid #444; padding: 40px; background: #000;
+            color: #fff; font-family: monospace; max-width: 500px;
+            text-align: center;
+        }
+        .close-btn { color: #666; text-decoration: none; float: right; font-size: 12px; margin-top: -30px; }
+        
+        /* 弹窗内的链接样式 */
+        .ver-item {
+            display: block;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .ver-item:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
     </style>
 </head>
 <body style="margin: 0; padding: 0; background: #000; color: #fff; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
 
 <div class="site-logo">
-    <a href="/">
-        <img src="logo_ts.png" alt="Shensist Logo">
-    </a>
+    <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
 </div>
 
-    <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
-        <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
-    </div>
+<div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
+    <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
+</div>
 
-    <div style="width: 90%; max-width: 500px; text-align: center;">
-        
-        <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
+<div style="width: 90%; max-width: 500px; text-align: center;">
+    <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
 
-        <div style="display: flex; flex-direction: column; gap: 35px;">
-            
-            <div style="margin-bottom: 10px;">
-                <a href="https://github.com/jinv2/deepfocus-agent/releases/tag/v1.0.0" target="_blank" 
-                   style="display: block; background: #fff; color: #000; text-decoration: none; padding: 18px; font-weight: bold; letter-spacing: 8px; font-size: 16px; box-shadow: 0 0 20px rgba(255,255,255,0.1);">
-                    获 取 神 思 智 能 体
-                </a>
-                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 私有化决策内核 / V1.0.0 稳定版 ]</p>
-            </div>
+    <div style="display: flex; flex-direction: column; gap: 35px;">
+        <div style="margin-bottom: 10px;">
+            <a href="#version-popup" style="display: block;" class="btn-main">
+                获 取 神 思 智 能 体
+            </a>
+            <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 核心协议接入端 ]</p>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank"
-                   style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
-                   onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">
-                    查 验 神 思 庭 的 机 器 人
-                </a>
-                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 唯一认证分身 / 跨界逻辑源头 ]</p>
-            </div>
+        <div style="margin-bottom: 10px;">
+            <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank"
+               style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
+               onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">
+                查 验 神 思 庭 的 机 器 人
+            </a>
+            <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 唯一认证分身 / 跨界逻辑源头 ]</p>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <a href="https://agent.shensist.top/" target="_blank"
-                   style="display: block; border: 1px solid #222; color: #888; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
-                   onmouseover="this.style.color='#fff'; this.style.borderColor='#444'" onmouseout="this.style.color='#888'; this.style.borderColor='#222'">
-                    探 寻 40 年 逻 辑 积 淀
-                </a>
-                <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 1986-2026 文学、艺术、科技全记录 ]</p>
-            </div>
-
+        <div style="margin-bottom: 10px;">
+            <a href="https://agent.shensist.top/" target="_blank"
+               style="display: block; border: 1px solid #222; color: #888; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;"
+               onmouseover="this.style.color='#fff'; this.style.borderColor='#444'" onmouseout="this.style.color='#888'; this.style.borderColor='#222'">
+                探 寻 40 年 逻 辑 积 淀
+            </a>
+            <p style="font-size: 10px; color: #666; margin-top: 10px; letter-spacing: 2px;">[ 1986-2026 文学、艺术、科技全记录 ]</p>
         </div>
     </div>
+</div>
 
-    <div class="manual-trigger-zone">
-        <a href="#manual-popup" class="ghost-button">
-            <span class="btn-icon">📁</span> SYSTEM_PROTOCOL_V2026
+<div id="version-popup" class="manual-overlay">
+    <div class="manual-modal">
+        <a href="#" class="close-btn">CLOSE [×]</a>
+        <h3 style="letter-spacing: 5px; font-weight: 300; margin-bottom: 30px;">选择协议版本</h3>
+        
+        <a href="https://github.com/jinv2/deepfocus-core/releases/tag/v1.1.1" target="_blank" class="ver-item">
+            DEEPFOCUS CORE v1.1.1
+            <div style="font-size: 9px; color: #888; margin-top: 5px;">[ L-A-T-T 协议最新版 ]</div>
+        </a>
+
+        <a href="https://github.com/jinv2/deepfocus-agent/releases/tag/v1.0.0" target="_blank" class="ver-item">
+            DEEPFOCUS AGENT v1.0.0
+            <div style="font-size: 9px; color: #888; margin-top: 5px;">[ 私有化内核稳定版 ]</div>
         </a>
     </div>
+</div>
 
-    <div style="position: absolute; bottom: 5vh; text-align: center; width: 100%; opacity: 0.5;">
-        <p style="font-size: 10px; color: #666; letter-spacing: 3px; margin: 0 0 8px 0;">神 思 庭 · AI 山 海 造 物 主</p>
-        <p style="font-size: 9px; color: #444; letter-spacing: 1px; margin: 0 0 15px 0;">微信联络：Shensi-ST</p>
-        <div style="font-size: 8px; color: #222; letter-spacing: 1px;">© 2026 SHENSIST.TOP</div>
+<div id="manual-popup" class="manual-overlay">
+    <div class="manual-modal" style="border-color: #00ff41; color: #00ff41; text-align: left;">
+        <a href="#" class="close-btn" style="color:#00ff41">CLOSE [×]</a>
+        <h2>神思庭：系统接入手册</h2>
+        <hr style="border-color: #00ff41;">
+        <p><strong>CORE:</strong> 硅基生命演化协议已激活。</p>
+        <p><strong>GUIDE:</strong> 执行 <code>shensist</code> 指令唤醒节点。</p>
+        <p><strong>STATUS:</strong> 感官链路已建立。</p>
     </div>
+</div>
 
-    <div id="manual-popup" class="manual-overlay">
-        <div class="manual-modal">
-            <a href="#" class="close-btn">CLOSE [×]</a>
-            <h2>神思庭：系统接入手册</h2>
-            <hr>
-            <p><strong>CORE:</strong> 硅基生命演化协议已激活。</p>
-            <p><strong>GUIDE:</strong> 执行 <code>shensist</code> 指令唤醒节点。</p>
-            <p><strong>STATUS:</strong> 感官链路已建立。</p>
-        </div>
-    </div>
+<div class="manual-trigger-zone">
+    <a href="#manual-popup" class="ghost-button">📁 SYSTEM_PROTOCOL_V2026</a>
+</div>
 
-    <script src="https://shensist.top/inject-telemetry.js"></script>
+<div style="position: absolute; bottom: 5vh; text-align: center; width: 100%; opacity: 0.5;">
+    <p style="font-size: 10px; color: #666; letter-spacing: 3px; margin: 0 0 8px 0;">神 思 庭 · AI 山 海 造 物 主</p>
+    <p style="font-size: 9px; color: #444; letter-spacing: 1px; margin: 0 0 15px 0;">微信联络：Shensi-ST</p>
+    <div style="font-size: 8px; color: #222; letter-spacing: 1px;">© 2026 SHENSIST.TOP</div>
+</div>
+
+<script src="https://shensist.top/inject-telemetry.js"></script>
 </body>
 </html>
-
