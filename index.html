@@ -75,24 +75,18 @@
             transition: all 0.4s ease;
         }
         
-        /* 智信风格 (防线/盾牌) */
-        .zhixin-nav { color: #ff3b3b; border: 1px solid rgba(255, 59, 59, 0.3); background: rgba(20, 0, 0, 0.6); }
-        .zhixin-nav:hover { background: rgba(255, 59, 59, 0.1); border-color: #ff3b3b; box-shadow: 0 0 15px rgba(255, 59, 59, 0.4); color: #fff; transform: translateY(-2px); }
-        .zhixin-dot { width: 6px; height: 6px; background: #ff3b3b; border-radius: 50%; box-shadow: 0 0 5px #ff3b3b; animation: red-pulse 1.5s infinite alternate; }
-        
         /* 归墟风格 (深渊/杀意) */
         .guixu-nav { color: #cc0000; border: 1px solid #8b0000; background: rgba(10, 0, 0, 0.8); }
         .guixu-nav:hover { background: #8b0000; border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); color: #fff; transform: translateY(-2px); }
         .guixu-dot { width: 6px; height: 6px; background: #ff0000; border-radius: 50%; box-shadow: 0 0 5px #ff0000; animation: guixu-pulse 1s infinite alternate; }
         
-        /* AUI风格 (界面/矩阵) */
-        .aui-nav { color: #9b59b6; border: 1px solid rgba(155, 89, 182, 0.3); background: rgba(75, 0, 130, 0.6); }
-        .aui-nav:hover { background: rgba(155, 89, 182, 0.1); border-color: #9b59b6; box-shadow: 0 0 15px rgba(155, 89, 182, 0.4); color: #fff; transform: translateY(-2px); }
-        .aui-dot { width: 6px; height: 6px; background: #9b59b6; border-radius: 50%; box-shadow: 0 0 5px #9b59b6; animation: aui-pulse 1.5s infinite alternate; }
-        
-        @keyframes red-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff3b3b; } 100% { opacity: 1; box-shadow: 0 0 10px #ff3b3b; } }
+        /* 智信风格 (AUI 物理信道) */
+        .zhixin-nav { color: #00ff41; border: 1px solid rgba(0, 255, 65, 0.3); background: rgba(0, 20, 0, 0.8); }
+        .zhixin-nav:hover { background: rgba(0, 255, 65, 0.1); border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); color: #fff; transform: translateY(-2px); }
+        .zhixin-dot { width: 6px; height: 6px; background: #00ff41; border-radius: 50%; box-shadow: 0 0 5px #00ff41; animation: green-pulse 1.5s infinite alternate; }
+
+        @keyframes green-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00ff41; } 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } }
         @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
-        @keyframes aui-pulse { 0% { opacity: 0.4; box-shadow: 0 0 2px #9b59b6; } 100% { opacity: 1; box-shadow: 0 0 12px #9b59b6; } }
     </style>
 </head>
 <body>
@@ -144,14 +138,14 @@
             <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
         </div>
         <div class="top-nav-group">
-            <a href="https://engine.shensist.top/" target="_blank" class="nav-btn guixu-nav" style="border-color: #ff00ff; background: rgba(20, 0, 20, 0.8);">
-                <span class="guixu-dot" style="background: #ff00ff; box-shadow: 0 0 5px #ff00ff;"></span>
-                �️ 归墟 · AUI 全息版
+            <a href="https://os.shensist.top/" target="_blank" class="nav-btn zhixin-nav">
+                <span class="zhixin-dot"></span>
+                🛡️ 神思庭 · 智信 AUI
             </a>
             
-            <a href="https://guixu.shensist.top" target="_blank" class="nav-btn guixu-nav">
-                <span class="guixu-dot"></span>
-                👹 归墟 · GUI 经典版
+            <a href="https://engine.shensist.top/" target="_blank" class="nav-btn guixu-nav" style="border-color: #ff00ff; background: rgba(20, 0, 20, 0.8);">
+                <span class="guixu-dot" style="background: #ff00ff; box-shadow: 0 0 5px #ff00ff;"></span>
+                ️ 归墟 · AUI 全息版
             </a>
         </div>
         <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
@@ -165,14 +159,15 @@
                     <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px;">[ RESONANCE v6.0.0 已上线 ]</p>
                 </div>
                 <div style="margin-bottom: 10px;">
+                    <a href="https://os.shensist.top/" target="_blank" style="display: block; border: 1px solid #00ff41; background: rgba(0,255,65,0.1); color: #00ff41; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,255,65,0.05);" onmouseover="this.style.background='#00ff41'; this.style.color='#000'; this.style.borderColor='#00ff41'; this.style.boxShadow='0 0 25px rgba(0,255,65,0.6)';" onmouseout="this.style.background='rgba(0,255,65,0.1)'; this.style.color='#00ff41'; this.style.borderColor='#00ff41'; this.style.boxShadow='inset 0 0 15px rgba(0,255,65,0.05)';">行 为 兑 现 · 智 信 AUI</a>
+                    <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,255,65,0.5);">[ 物理成品交付 / 商务合规签发 ]</p>
+                </div>
+
+                <div style="margin-bottom: 10px;">
                     <a href="https://engine.shensist.top/" target="_blank" style="display: block; border: 1px solid #8b008b; background: rgba(139,0,139,0.1); color: #ff33ff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,0,255,0.05);" onmouseover="this.style.background='#8b008b'; this.style.color='#fff'; this.style.borderColor='#ff00ff'; this.style.boxShadow='0 0 25px rgba(255,0,255,0.6)';" onmouseout="this.style.background='rgba(139,0,139,0.1)'; this.style.color='#ff33ff'; this.style.borderColor='#8b008b'; this.style.boxShadow='inset 0 0 15px rgba(255,0,255,0.05)';">降 维 打 击 · 归 墟 AUI</a>
                     <p style="font-size: 10px; color: #ff33ff; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,0,255,0.5);">[ 全息视界引擎 / 多模态感官轰炸 ]</p>
                 </div>
 
-                <div style="margin-bottom: 10px;">
-                    <a href="https://guixu.shensist.top" target="_blank" style="display: block; border: 1px solid #8b0000; background: rgba(139,0,0,0.1); color: #ff3333; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,0,0,0.05);" onmouseover="this.style.background='#8b0000'; this.style.color='#fff'; this.style.borderColor='#ff0000'; this.style.boxShadow='0 0 25px rgba(255,0,0,0.6)';" onmouseout="this.style.background='rgba(139,0,0,0.1)'; this.style.color='#ff3333'; this.style.borderColor='#8b0000'; this.style.boxShadow='inset 0 0 15px rgba(255,0,0,0.05)';">直 面 现 世 劫 数 · 归 墟 GUI</a>
-                    <p style="font-size: 10px; color: #ff3333; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,0,0,0.5);">[ 经典宪法引擎 / 绝对理性博弈 ]</p>
-                </div>
                 <div style="margin-bottom: 10px;">
                     <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">查 验 神 思 庭 的 机 器 人</a>
                 </div>
@@ -187,14 +182,14 @@
         <a href="#" class="close-btn">CLOSE [×]</a>
         <h3 style="letter-spacing: 5px; font-weight: 300; margin-bottom: 20px;">接入协议 & 逻辑社交</h3>
         
-        <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item" style="border-color: #00ff41; background: rgba(0, 255, 65, 0.05);">
-            <span style="color: #00ff41; font-weight: bold; letter-spacing: 2px;">下载 V6 [RESONANCE]</span>
-            <div style="font-size: 10px; color: #00ff41; margin-top: 5px;">[ 1.0M Context / 共振架构 ]</div>
+        <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41; background: rgba(0, 255, 65, 0.05);">
+            <span style="color: #00ff41; font-weight: bold; letter-spacing: 2px;">下载 Shensist-Dual-OS [AUI版]</span>
+            <div style="font-size: 10px; color: #00ff41; margin-top: 5px;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
         </a>
 
-        <a href="https://github.com/jinv2/LATT-Core-V5-Final" target="_blank" class="ver-item">
-            <span style="color: #fff; letter-spacing: 2px;">下载 LATT v5.0.0 [神思]</span>
-            <div style="font-size: 10px; color: #888; margin-top: 5px;">[ 经典：1050Ti 物理闭环版本 ]</div>
+        <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
+            <span style="color: #fff; letter-spacing: 2px;">下载 V6 [RESONANCE]</span>
+            <div style="font-size: 10px; color: #888; margin-top: 5px;">[ 1.0M Context / 共振架构 ]</div>
         </a>
 
         <div style="margin: 30px 0 20px 0; border-top: 1px solid #222; padding-top: 20px;">
@@ -206,10 +201,6 @@
                 <div style="font-size: 10px; color: #ff3e00; margin-top: 5px;">[ Moltbook 逻辑节点握手 ]</div>
             </a>
         </div>
-
-        <a href="https://github.com/jinv2/latt-guardian-core" target="_blank" class="ver-item" style="opacity: 0.6;">
-            <span style="color: #aaa;">查看历史版本 (v4.0 / v1.2.0)</span>
-        </a>
     </div>
 </div>
 
@@ -242,5 +233,3 @@
     </script>
 </body>
 </html>
-
-
