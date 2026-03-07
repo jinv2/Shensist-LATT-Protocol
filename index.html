@@ -85,14 +85,20 @@
         .zhixin-nav:hover { background: rgba(0, 255, 65, 0.1); border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); color: #fff; transform: translateY(-2px); }
         .zhixin-dot { width: 6px; height: 6px; background: #00ff41; border-radius: 50%; box-shadow: 0 0 5px #00ff41; animation: green-pulse 1.5s infinite alternate; }
 
-        /* 【新增】九尾狐伴侣风格 (琥珀金/赛博金) */
+        /* 九尾狐伴侣风格 (琥珀金/赛博金) */
         .fox-nav { color: #ffcc00; border: 1px solid rgba(255, 153, 0, 0.4); background: rgba(25, 15, 0, 0.8); }
         .fox-nav:hover { background: rgba(255, 153, 0, 0.1); border-color: #ff9900; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); color: #fff; transform: translateY(-2px); }
         .fox-dot { width: 6px; height: 6px; background: #ff9900; border-radius: 50%; box-shadow: 0 0 5px #ff9900; animation: fox-pulse 1.5s infinite alternate; }
 
+        /* 【新增】AUI 矩阵风格 (朱砂红/极客风) */
+        .matrix-nav { color: #d72626; border: 1px solid rgba(215, 38, 38, 0.4); background: rgba(20, 0, 0, 0.8); }
+        .matrix-nav:hover { background: rgba(215, 38, 38, 0.1); border-color: #d72626; box-shadow: 0 0 15px rgba(215, 38, 38, 0.5); color: #fff; transform: translateY(-2px); }
+        .matrix-dot { width: 6px; height: 6px; background: #d72626; border-radius: 50%; box-shadow: 0 0 5px #d72626; animation: matrix-pulse 1.5s infinite alternate; }
+
         @keyframes green-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00ff41; } 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } }
         @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
         @keyframes fox-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff9900; } 100% { opacity: 1; box-shadow: 0 0 10px #ff9900; } }
+        @keyframes matrix-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #d72626; } 100% { opacity: 1; box-shadow: 0 0 10px #d72626; } }
     </style>
 </head>
 <body>
@@ -145,6 +151,11 @@
         </div>
         
         <div class="top-nav-group">
+            <a href="https://matrix.shensist.top/" target="_blank" class="nav-btn matrix-nav">
+                <span class="matrix-dot"></span>
+                🔗 矩阵 · 人机悬赏
+            </a>
+
             <a href="https://os.shensist.top/" target="_blank" class="nav-btn zhixin-nav">
                 <span class="zhixin-dot"></span>
                 🛡️ 神思庭 · 智信 AUI
@@ -171,6 +182,11 @@
                 <div style="margin-bottom: 10px;">
                     <a href="#version-popup" style="display: block;" class="btn-main">获 取 神 思 智 能 体</a>
                     <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px;">[ RESONANCE v6.0.0 已上线 ]</p>
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <a href="https://matrix.shensist.top/" target="_blank" style="display: block; border: 1px solid #d72626; background: rgba(215,38,38,0.1); color: #d72626; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(215,38,38,0.05);" onmouseover="this.style.background='#d72626'; this.style.color='#fff'; this.style.borderColor='#d72626'; this.style.boxShadow='0 0 25px rgba(215,38,38,0.6)';" onmouseout="this.style.background='rgba(215,38,38,0.1)'; this.style.color='#d72626'; this.style.borderColor='#d72626'; this.style.boxShadow='inset 0 0 15px rgba(215,38,38,0.05)';">跨 界 互 联 · A U I 矩 阵</a>
+                    <p style="font-size: 10px; color: #d72626; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(215,38,38,0.5);">[ 智械发令 / 凡躯跑腿接单 ]</p>
                 </div>
 
                 <div style="margin-bottom: 10px;">
