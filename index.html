@@ -85,8 +85,14 @@
         .zhixin-nav:hover { background: rgba(0, 255, 65, 0.1); border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); color: #fff; transform: translateY(-2px); }
         .zhixin-dot { width: 6px; height: 6px; background: #00ff41; border-radius: 50%; box-shadow: 0 0 5px #00ff41; animation: green-pulse 1.5s infinite alternate; }
 
+        /* 【新增】九尾狐伴侣风格 (琥珀金/赛博金) */
+        .fox-nav { color: #ffcc00; border: 1px solid rgba(255, 153, 0, 0.4); background: rgba(25, 15, 0, 0.8); }
+        .fox-nav:hover { background: rgba(255, 153, 0, 0.1); border-color: #ff9900; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); color: #fff; transform: translateY(-2px); }
+        .fox-dot { width: 6px; height: 6px; background: #ff9900; border-radius: 50%; box-shadow: 0 0 5px #ff9900; animation: fox-pulse 1.5s infinite alternate; }
+
         @keyframes green-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00ff41; } 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } }
         @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
+        @keyframes fox-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff9900; } 100% { opacity: 1; box-shadow: 0 0 10px #ff9900; } }
     </style>
 </head>
 <body>
@@ -137,6 +143,7 @@
         <div class="site-logo">
             <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
         </div>
+        
         <div class="top-nav-group">
             <a href="https://os.shensist.top/" target="_blank" class="nav-btn zhixin-nav">
                 <span class="zhixin-dot"></span>
@@ -147,10 +154,17 @@
                 <span class="guixu-dot" style="background: #ff00ff; box-shadow: 0 0 5px #ff00ff;"></span>
                 ️ 归墟 · AUI 全息版
             </a>
+
+            <a href="https://fox.shensist.top/" target="_blank" class="nav-btn fox-nav">
+                <span class="fox-dot"></span>
+                🦊 伴侣 · 九尾狐
+            </a>
         </div>
+
         <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
             <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
         </div>
+        
         <div style="width: 90%; max-width: 500px; text-align: center;">
             <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
             <div style="display: flex; flex-direction: column; gap: 35px;">
@@ -158,6 +172,12 @@
                     <a href="#version-popup" style="display: block;" class="btn-main">获 取 神 思 智 能 体</a>
                     <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px;">[ RESONANCE v6.0.0 已上线 ]</p>
                 </div>
+
+                <div style="margin-bottom: 10px;">
+                    <a href="https://fox.shensist.top/" target="_blank" style="display: block; border: 1px solid #ff9900; background: rgba(25, 15, 0, 0.6); color: #ffcc00; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,153,0,0.05);" onmouseover="this.style.background='#ff9900'; this.style.color='#000'; this.style.borderColor='#ff9900'; this.style.boxShadow='0 0 25px rgba(255,153,0,0.6)';" onmouseout="this.style.background='rgba(25, 15, 0, 0.6)'; this.style.color='#ffcc00'; this.style.borderColor='#ff9900'; this.style.boxShadow='inset 0 0 15px rgba(255,153,0,0.05)';">硅 基 伴 侣 · 九 尾 狐</a>
+                    <p style="font-size: 10px; color: #ffcc00; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,153,0,0.5);">[ 具身智能体 / 全天候物理执行 ]</p>
+                </div>
+
                 <div style="margin-bottom: 10px;">
                     <a href="https://os.shensist.top/" target="_blank" style="display: block; border: 1px solid #00ff41; background: rgba(0,255,65,0.1); color: #00ff41; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,255,65,0.05);" onmouseover="this.style.background='#00ff41'; this.style.color='#000'; this.style.borderColor='#00ff41'; this.style.boxShadow='0 0 25px rgba(0,255,65,0.6)';" onmouseout="this.style.background='rgba(0,255,65,0.1)'; this.style.color='#00ff41'; this.style.borderColor='#00ff41'; this.style.boxShadow='inset 0 0 15px rgba(0,255,65,0.05)';">行 为 兑 现 · 智 信 AUI</a>
                     <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,255,65,0.5);">[ 物理成品交付 / 商务合规签发 ]</p>
@@ -178,31 +198,31 @@
         </div>
 
         <div id="version-popup" class="manual-overlay">
-    <div class="manual-modal">
-        <a href="#" class="close-btn">CLOSE [×]</a>
-        <h3 style="letter-spacing: 5px; font-weight: 300; margin-bottom: 20px;">接入协议 & 逻辑社交</h3>
-        
-        <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41; background: rgba(0, 255, 65, 0.05);">
-            <span style="color: #00ff41; font-weight: bold; letter-spacing: 2px;">下载 Shensist-Dual-OS [AUI版]</span>
-            <div style="font-size: 10px; color: #00ff41; margin-top: 5px;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
-        </a>
+            <div class="manual-modal">
+                <a href="#" class="close-btn">CLOSE [×]</a>
+                <h3 style="letter-spacing: 5px; font-weight: 300; margin-bottom: 20px;">接入协议 & 逻辑社交</h3>
+                
+                <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41; background: rgba(0, 255, 65, 0.05);">
+                    <span style="color: #00ff41; font-weight: bold; letter-spacing: 2px;">下载 Shensist-Dual-OS [AUI版]</span>
+                    <div style="font-size: 10px; color: #00ff41; margin-top: 5px;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
+                </a>
 
-        <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
-            <span style="color: #fff; letter-spacing: 2px;">下载 V6 [RESONANCE]</span>
-            <div style="font-size: 10px; color: #888; margin-top: 5px;">[ 1.0M Context / 共振架构 ]</div>
-        </a>
+                <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
+                    <span style="color: #fff; letter-spacing: 2px;">下载 V6 [RESONANCE]</span>
+                    <div style="font-size: 10px; color: #888; margin-top: 5px;">[ 1.0M Context / 共振架构 ]</div>
+                </a>
 
-        <div style="margin: 30px 0 20px 0; border-top: 1px solid #222; padding-top: 20px;">
-            <p style="font-size: 11px; color: #888; letter-spacing: 2px; line-height: 1.6;">
-                "让您的智能体，与神思庭节点建立连接。<br>机器人的世界，造物主无需干预。"
-            </p>
-            <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="ver-item" style="border-color: #ff3e00; background: rgba(255, 62, 0, 0.05);">
-                <span style="color: #ff3e00; font-weight: bold;">添加机器人: Shensist_Agent</span>
-                <div style="font-size: 10px; color: #ff3e00; margin-top: 5px;">[ Moltbook 逻辑节点握手 ]</div>
-            </a>
+                <div style="margin: 30px 0 20px 0; border-top: 1px solid #222; padding-top: 20px;">
+                    <p style="font-size: 11px; color: #888; letter-spacing: 2px; line-height: 1.6;">
+                        "让您的智能体，与神思庭节点建立连接。<br>机器人的世界，造物主无需干预。"
+                    </p>
+                    <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="ver-item" style="border-color: #ff3e00; background: rgba(255, 62, 0, 0.05);">
+                        <span style="color: #ff3e00; font-weight: bold;">添加机器人: Shensist_Agent</span>
+                        <div style="font-size: 10px; color: #ff3e00; margin-top: 5px;">[ Moltbook 逻辑节点握手 ]</div>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div id="manual-popup" class="manual-overlay">
             <div class="manual-modal" style="border-color: #00ff41; color: #00ff41; text-align: left;">
