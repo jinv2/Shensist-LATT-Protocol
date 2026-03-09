@@ -95,10 +95,16 @@
         .matrix-nav:hover { background: rgba(215, 38, 38, 0.1); border-color: #d72626; box-shadow: 0 0 15px rgba(215, 38, 38, 0.5); color: #fff; transform: translateY(-2px); }
         .matrix-dot { width: 6px; height: 6px; background: #d72626; border-radius: 50%; box-shadow: 0 0 5px #d72626; animation: matrix-pulse 1.5s infinite alternate; }
 
+        /* 神兵风格 (亮金) */
+        .jgb-nav { color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.4); background: rgba(20, 18, 0, 0.8); }
+        .jgb-nav:hover { background: rgba(255, 215, 0, 0.1); border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); color: #fff; transform: translateY(-2px); }
+        .jgb-dot { width: 6px; height: 6px; background: #ffd700; border-radius: 50%; box-shadow: 0 0 5px #ffd700; animation: jgb-pulse 1.5s infinite alternate; }
+
         @keyframes green-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00ff41; } 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } }
         @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
         @keyframes fox-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff9900; } 100% { opacity: 1; box-shadow: 0 0 10px #ff9900; } }
         @keyframes matrix-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #d72626; } 100% { opacity: 1; box-shadow: 0 0 10px #d72626; } }
+        @keyframes jgb-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ffd700; } 100% { opacity: 1; box-shadow: 0 0 10px #ffd700; } }
     </style>
 </head>
 <body>
@@ -170,6 +176,11 @@
                 <span class="fox-dot"></span>
                 🦊 伴侣 · 九尾狐
             </a>
+
+            <a href="https://jingubang.shensist.top/" target="_blank" class="nav-btn jgb-nav">
+                <span class="jgb-dot"></span>
+                ⚡ 神兵 · 金箍棒
+            </a>
         </div>
 
         <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
@@ -192,6 +203,11 @@
                 <div style="margin-bottom: 10px;">
                     <a href="https://fox.shensist.top/" target="_blank" style="display: block; border: 1px solid #ff9900; background: rgba(25, 15, 0, 0.6); color: #ffcc00; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,153,0,0.05);" onmouseover="this.style.background='#ff9900'; this.style.color='#000'; this.style.borderColor='#ff9900'; this.style.boxShadow='0 0 25px rgba(255,153,0,0.6)';" onmouseout="this.style.background='rgba(25, 15, 0, 0.6)'; this.style.color='#ffcc00'; this.style.borderColor='#ff9900'; this.style.boxShadow='inset 0 0 15px rgba(255,153,0,0.05)';">硅 基 伴 侣 · 九 尾 狐</a>
                     <p style="font-size: 10px; color: #ffcc00; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,153,0,0.5);">[ 具身智能体 / 全天候物理执行 ]</p>
+                </div>
+
+                <div style="margin-bottom: 10px;">
+                    <a href="https://jingubang.shensist.top/" target="_blank" style="display: block; border: 1px solid #ffd700; background: rgba(20, 18, 0, 0.6); color: #ffd700; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,215,0,0.05);" onmouseover="this.style.background='#ffd700'; this.style.color='#000'; this.style.borderColor='#ffd700'; this.style.boxShadow='0 0 25px rgba(255,215,0,0.6)';" onmouseout="this.style.background='rgba(20, 18, 0, 0.6)'; this.style.color='#ffd700'; this.style.borderColor='#ffd700'; this.style.boxShadow='inset 0 0 15px rgba(255,215,0,0.05)';">神 兵 利 器 · 金 箍 棒</a>
+                    <p style="font-size: 10px; color: #ffd700; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,215,0,0.5);">[ 本地大模型终端 / 指令直接生效 ]</p>
                 </div>
 
                 <div style="margin-bottom: 10px;">
