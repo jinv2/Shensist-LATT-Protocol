@@ -95,6 +95,11 @@
         .matrix-nav:hover { background: rgba(215, 38, 38, 0.1); border-color: #d72626; box-shadow: 0 0 15px rgba(215, 38, 38, 0.5); color: #fff; transform: translateY(-2px); }
         .matrix-dot { width: 6px; height: 6px; background: #d72626; border-radius: 50%; box-shadow: 0 0 5px #d72626; animation: matrix-pulse 1.5s infinite alternate; }
 
+        /* 琅玕风格 (流光翡翠/山海经) */
+        .langgan-nav { color: #4AF1A9; border: 1px solid rgba(74, 241, 169, 0.4); background: rgba(0, 20, 15, 0.8); }
+        .langgan-nav:hover { background: rgba(74, 241, 169, 0.1); border-color: #4AF1A9; box-shadow: 0 0 15px rgba(74, 241, 169, 0.5); color: #fff; transform: translateY(-2px); }
+        .langgan-dot { width: 6px; height: 6px; background: #4AF1A9; border-radius: 50%; box-shadow: 0 0 5px #4AF1A9; animation: langgan-pulse 1.5s infinite alternate; }
+
         /* 神兵风格 (亮金) */
         .jgb-nav { color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.4); background: rgba(20, 18, 0, 0.8); }
         .jgb-nav:hover { background: rgba(255, 215, 0, 0.1); border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); color: #fff; transform: translateY(-2px); }
@@ -104,6 +109,7 @@
         @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
         @keyframes fox-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff9900; } 100% { opacity: 1; box-shadow: 0 0 10px #ff9900; } }
         @keyframes matrix-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #d72626; } 100% { opacity: 1; box-shadow: 0 0 10px #d72626; } }
+        @keyframes langgan-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #4AF1A9; } 100% { opacity: 1; box-shadow: 0 0 10px #4AF1A9; } }
         @keyframes jgb-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ffd700; } 100% { opacity: 1; box-shadow: 0 0 10px #ffd700; } }
     </style>
 </head>
@@ -157,6 +163,11 @@
         </div>
         
         <div class="top-nav-group">
+            <a href="https://langgan.shensist.top/" target="_blank" class="nav-btn langgan-nav">
+                <span class="langgan-dot"></span>
+                🌿 琅玕 · 资讯珍珠
+            </a>
+
             <a href="https://matrix.shensist.top/" target="_blank" class="nav-btn matrix-nav">
                 <span class="matrix-dot"></span>
                 🔗 矩阵 · 人机悬赏
@@ -190,6 +201,11 @@
         <div style="width: 90%; max-width: 500px; text-align: center;">
             <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
             <div style="display: flex; flex-direction: column; gap: 35px;">
+                <div style="margin-bottom: 10px;">
+                    <a href="https://langgan.shensist.top/" target="_blank" style="display: block; border: 1px solid #4AF1A9; background: rgba(74,241,169,0.1); color: #4AF1A9; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(74,241,169,0.05);" onmouseover="this.style.background='#4AF1A9'; this.style.color='#000'; this.style.borderColor='#4AF1A9'; this.style.boxShadow='0 0 25px rgba(74,241,169,0.6)';" onmouseout="this.style.background='rgba(74,241,169,0.1)'; this.style.color='#4AF1A9';">采 撷 珍 珠 · 琅 玕 资 讯</a>
+                    <p style="font-size: 10px; color: #4AF1A9; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(74,241,169,0.5);">[ 自动化任务拆解 / 珍珠化提炼 ]</p>
+                </div>
+
                 <div style="margin-bottom: 10px;">
                     <a href="#version-popup" style="display: block;" class="btn-main">获 取 神 思 智 能 体</a>
                     <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px;">[ RESONANCE v6.0.0 已上线 ]</p>
