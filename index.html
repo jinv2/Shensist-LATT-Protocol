@@ -117,6 +117,12 @@
         @keyframes jiao-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff6b6b; } 100% { opacity: 1; box-shadow: 0 0 10px #ff6b6b; } }
         @keyframes langgan-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #4AF1A9; } 100% { opacity: 1; box-shadow: 0 0 10px #4AF1A9; } }
         @keyframes jgb-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ffd700; } 100% { opacity: 1; box-shadow: 0 0 10px #ffd700; } }
+
+        /* 伯风格 (幽蓝/声音主权) */
+        .bo-nav { color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.4); background: rgba(0, 10, 20, 0.8); }
+        .bo-nav:hover { background: rgba(0, 212, 255, 0.1); border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); color: #fff; transform: translateY(-2px); }
+        .bo-dot { width: 6px; height: 6px; background: #00d4ff; border-radius: 50%; box-shadow: 0 0 5px #00d4ff; animation: bo-pulse 1.5s infinite alternate; }
+        @keyframes bo-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00d4ff; } 100% { opacity: 1; box-shadow: 0 0 10px #00d4ff; } }
     </style>
 </head>
 <body>
@@ -203,6 +209,11 @@
                 <span class="jgb-dot"></span>
                 ⚡ 神兵 · 金箍棒
             </a>
+
+            <a href="https://bo.shensist.top/" target="_blank" class="nav-btn bo-nav">
+                <span class="bo-dot"></span>
+                🎙️ 伯 · 语音方案
+            </a>
         </div>
 
         <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
@@ -212,6 +223,15 @@
         <div style="width: 90%; max-width: 500px; text-align: center;">
             <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
             <div style="display: flex; flex-direction: column; gap: 35px;">
+                <div style="margin-bottom: 35px;">
+                    <a href="https://bo.shensist.top/" target="_blank" style="display: block; border: 1px solid #00d4ff; background: rgba(0,212,255,0.1); color: #00d4ff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,212,255,0.05);" 
+                       onmouseover="this.style.background='#00d4ff'; this.style.color='#000'; this.style.borderColor='#00d4ff'; this.style.boxShadow='0 0 25px rgba(0,212,255,0.6)';" 
+                       onmouseout="this.style.background='rgba(0,212,255,0.1)'; this.style.color='#00d4ff';">
+                       鸣 响 伯 乐 · 语 音 核 心
+                    </a>
+                    <p style="font-size: 10px; color: #00d4ff; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,212,255,0.5);">[ 针对性语音唤醒 / 本地化交互核心 ]</p>
+                </div>
+
                 <div style="margin-bottom: 35px;">
                     <a href="https://jiao.shensist.top/" target="_blank" style="display: block; border: 1px solid #00FFD5; background: rgba(0,255,213,0.1); color: #00FFD5; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,255,213,0.05);" 
                        onmouseover="this.style.background='#00FFD5'; this.style.color='#000'; this.style.borderColor='#00FFD5'; this.style.boxShadow='0 0 25px rgba(0,255,213,0.6)';" 
