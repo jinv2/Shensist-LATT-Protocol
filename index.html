@@ -123,6 +123,12 @@
         .bo-nav:hover { background: rgba(0, 212, 255, 0.1); border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); color: #fff; transform: translateY(-2px); }
         .bo-dot { width: 6px; height: 6px; background: #00d4ff; border-radius: 50%; box-shadow: 0 0 5px #00d4ff; animation: bo-pulse 1.5s infinite alternate; }
         @keyframes bo-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00d4ff; } 100% { opacity: 1; box-shadow: 0 0 10px #00d4ff; } }
+
+        /* 小智风格 (量子蓝/剧情沉浸) */
+        .xiaozhi-nav { color: #007BFF; border: 1px solid rgba(0, 123, 255, 0.4); background: rgba(0, 5, 20, 0.8); }
+        .xiaozhi-nav:hover { background: rgba(0, 123, 255, 0.1); border-color: #007BFF; box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); color: #fff; transform: translateY(-2px); }
+        .xiaozhi-dot { width: 6px; height: 6px; background: #007BFF; border-radius: 50%; box-shadow: 0 0 5px #007BFF; animation: xiaozhi-pulse 1.5s infinite alternate; }
+        @keyframes xiaozhi-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #007BFF; } 100% { opacity: 1; box-shadow: 0 0 10px #007BFF; } }
     </style>
 </head>
 <body>
@@ -175,6 +181,10 @@
         </div>
         
         <div class="top-nav-group">
+            <a href="https://xiaozhi.shensist.top/" target="_blank" class="nav-btn xiaozhi-nav">
+                <span class="xiaozhi-dot"></span>
+                🤖 智能体 · 小智
+            </a>
             <a href="https://jiao.shensist.top/" target="_blank" class="nav-btn jiao-nav">
                 <span class="jiao-dot"></span>
                 🏮 狡 · 真单日报
@@ -279,8 +289,13 @@
                 <div style="margin-bottom: 10px;">
                     <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">查 验 神 思 庭 的 机 器 人</a>
                 </div>
-                <div style="margin-bottom: 10px;">
-                    <a href="https://agent.shensist.top/" target="_blank" style="display: block; border: 1px solid #222; color: #888; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;" onmouseover="this.style.color='#fff'; this.style.borderColor='#444'" onmouseout="this.style.color='#888'; this.style.borderColor='#222'">探 寻 40 年 逻 辑 积 淀</a>
+                <div style="margin-bottom: 35px;">
+                    <a href="https://xiaozhi.shensist.top/" target="_blank" style="display: block; border: 1px solid #007BFF; background: rgba(0,123,255,0.1); color: #007BFF; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,123,255,0.05);" 
+                       onmouseover="this.style.background='#007BFF'; this.style.color='#fff'; this.style.borderColor='#007BFF'; this.style.boxShadow='0 0 25px rgba(0,123,255,0.6)';" 
+                       onmouseout="this.style.background='rgba(0,123,255,0.1)'; this.style.color='#007BFF';">
+                       沉 浸 剧 情 · 小 智 A g e n t
+                    </a>
+                    <p style="font-size: 10px; color: #007BFF; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,123,255,0.5);">[ 三月十四夜 / 门已打开 / 不可撤回 ]</p>
                 </div>
             </div>
         </div>
