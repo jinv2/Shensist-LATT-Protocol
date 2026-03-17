@@ -2,357 +2,718 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>SHENSIST | L-A-T-T CORE V5 - 神思</title>
-    <link rel="canonical" href="https://shensist.top/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>神思AUI · 语音太阳系</title>
     <style>
-        /* 1. 基础全局样式 */
-        body, html { margin: 0; padding: 0; background: #000; overflow: hidden; height: 100vh; width: 100vw; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            font-family: 'PingFang SC', monospace;
+            overflow: hidden;
+        }
 
-        /* --- 第一层：宣传发布页样式 (神思 v5.0 专属) --- */
-        #update-layer {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 10000; transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
-            color: #fff; font-family: 'Inter', 'PingFang SC', monospace; overflow-y: auto;
+        /* 星空背景 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
-        #update-layer::before {
-            content: " "; display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(0, 255, 65, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 118, 0.06));
-            z-index: 9999; background-size: 100% 2px, 3px 100%; pointer-events: none;
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
         }
-        .container { max-width: 800px; margin: 0 auto; padding: 10vh 20px; position: relative; z-index: 10; }
-        .status-bar { font-size: 10px; color: #444; letter-spacing: 3px; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 50px; display: flex; justify-content: space-between; }
-        .release-title { font-size: 12px; color: #00ff41; letter-spacing: 10px; margin-bottom: 10px; }
-        .container h1 { font-size: clamp(32px, 8vw, 64px); letter-spacing: 15px; margin: 0; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
-        .version-badge { display: inline-block; background: #00ff41; color: #000; padding: 5px 15px; font-size: 12px; font-weight: bold; margin-top: 20px; letter-spacing: 2px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 80px; }
-        .feature-box { border-left: 1px solid #222; padding-left: 20px; }
-        .feature-box h3 { font-size: 14px; color: #888; letter-spacing: 2px; margin: 0 0 10px 0; }
-        .feature-box p { font-size: 13px; line-height: 1.8; color: #555; margin: 0; }
-        .protocol-log { background: #0a0a0a; padding: 20px; font-family: monospace; font-size: 11px; color: #00ff41; margin-top: 60px; border-radius: 2px; line-height: 1.5; border: 1px solid #111; }
-        .action-zone { margin-top: 80px; text-align: center; }
-        .btn-upgrade { display: inline-block; border: 1px solid #fff; color: #fff; padding: 20px 60px; text-decoration: none; font-size: 16px; letter-spacing: 5px; transition: all 0.4s; cursor: pointer; font-weight: bold; }
-        .btn-upgrade:hover { background: #00ff41; color: #000; border-color: #00ff41; box-shadow: 0 0 30px rgba(0,255,65,0.3); }
-        .live-dot { height: 8px; width: 8px; background: #00ff41; border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
 
-        /* --- 第二层：官网主页样式 --- */
-        #main-site {
-            position: relative; width: 100%; height: 100vh; background: #000; color: #fff;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        /* 网站标题 */
+        .site-title {
+            position: absolute;
+            top: 3vh;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 200;
+            pointer-events: none;
         }
-        @keyframes brain-pulse {
-            0% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
-            50% { box-shadow: 0 0 25px rgba(255,255,255,0.4); }
-            100% { box-shadow: 0 0 5px rgba(255,255,255,0.1); }
+        .site-title h1 {
+            font-size: clamp(10px, 3vw, 14px);
+            letter-spacing: clamp(6px, 2vw, 12px);
+            color: #444;
+            margin: 0;
+            font-weight: 300;
         }
-        .btn-main {
-            background: #fff; color: #000; animation: brain-pulse 4s infinite ease-in-out;
-            display: block; text-decoration: none; padding: 18px; font-weight: bold;
-            letter-spacing: 8px; font-size: 16px; box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        .site-title h2 {
+            font-size: clamp(16px, 5vw, 24px);
+            letter-spacing: clamp(4px, 1.5vw, 8px);
+            color: #00ff41;
+            margin: 5px 0 0 0;
+            font-weight: 400;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        /* 左上角LOGO */
+        .site-logo {
+            position: fixed;
+            top: clamp(10px, 2vh, 25px);
+            left: clamp(10px, 2vw, 25px);
+            z-index: 999;
+            background: transparent;
+        }
+        .site-logo img {
+            width: clamp(32px, 6vw, 48px);
+            height: auto;
+            display: block;
+            mix-blend-mode: screen;
+            filter: brightness(1.5);
+        }
+
+        /* 太阳 */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(60px, 15vw, 100px);
+            height: clamp(60px, 15vw, 100px);
+            background: #ffaa00;
+            border-radius: 50%;
+            box-shadow: 0 0 clamp(30px, 8vw, 60px) #ffaa00;
+            z-index: 100;
+            animation: sun-pulse 4s infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: clamp(10px, 2.5vw, 14px);
+            text-align: center;
+            line-height: 1.3;
+            letter-spacing: clamp(1px, 0.5vw, 2px);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        @keyframes sun-pulse {
+            0% { box-shadow: 0 0 clamp(30px, 8vw, 60px) #ffaa00; }
+            100% { box-shadow: 0 0 clamp(50px, 12vw, 100px) #ffaa00; }
+        }
+
+        /* 轨道容器 - 使用视口单位 */
+        .orbit-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(90vw, 900px);
+            height: min(90vw, 900px);
+            z-index: 10;
+        }
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        /* 动态轨道半径 - 使用视口单位 */
+        .orbit-1 { width: min(30vw, 300px); height: min(30vw, 300px); }
+        .orbit-2 { width: min(45vw, 450px); height: min(45vw, 450px); }
+        .orbit-3 { width: min(60vw, 600px); height: min(60vw, 600px); }
+        .orbit-4 { width: min(75vw, 750px); height: min(75vw, 750px); }
+        .orbit-5 { width: min(90vw, 900px); height: min(90vw, 900px); }
+
+        /* 行星 */
+        .planet {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.1s ease;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: clamp(8px, 2vw, 12px);
+            text-align: center;
+            line-height: 1.2;
+            text-decoration: none;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) currentColor;
+            width: clamp(30px, 7vw, 42px);
+            height: clamp(30px, 7vw, 42px);
+        }
+        .planet:hover {
+            box-shadow: 0 0 clamp(20px, 4vw, 40px) currentColor;
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 200;
+        }
+        .planet.preview {
+            box-shadow: 0 0 clamp(40px, 8vw, 80px) currentColor;
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+        .planet.active {
+            box-shadow: 0 0 clamp(60px, 12vw, 120px) currentColor;
+            transform: translate(-50%, -50%) scale(1.5);
+            border: 3px solid #fff;
+            z-index: 300;
+        }
+
+        /* 数字编号 */
+        .number-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: clamp(20px, 4vw, 28px);
+            height: clamp(20px, 4vw, 28px);
+            background: #00ff41;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: clamp(12px, 2.5vw, 16px);
+            border: 2px solid #fff;
+            z-index: 60;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) #00ff41;
+            pointer-events: none;
+        }
+
+        .planet-name {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: #fff;
+            font-size: clamp(8px, 1.8vw, 12px);
+            background: rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            pointer-events: none;
+        }
+
+        /* 公转动画 */
+        @keyframes rotate-orbit {
+            from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+        }
+        .rotating {
+            animation: rotate-orbit var(--orbit-duration) linear infinite;
+            animation-duration: calc(var(--orbit-duration) * 2);
+        }
+
+        /* 按钮区域 */
+        .button-area {
+            position: absolute;
+            bottom: clamp(100px, 20vh, 180px);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: clamp(10px, 2vw, 20px);
+            z-index: 300;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 800px;
+        }
+        .action-btn {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            padding: clamp(8px, 2vh, 12px) clamp(12px, 3vw, 25px);
+            font-size: clamp(11px, 2.5vw, 14px);
+            letter-spacing: clamp(1px, 0.5vw, 2px);
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            white-space: nowrap;
+        }
+        .action-btn:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 40px #00ff41;
+            transform: scale(1.05);
+        }
+
+        /* 语音状态栏 */
+        .voice-status-bar {
+            position: fixed;
+            bottom: clamp(160px, 30vh, 280px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #00ff41;
+            border-radius: 40px;
+            padding: clamp(8px, 1.5vh, 12px) clamp(15px, 3vw, 30px);
+            display: flex;
+            gap: clamp(10px, 2vw, 25px);
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+            font-size: clamp(11px, 2.2vw, 14px);
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 600px;
+        }
+        .mic-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mic-dot {
+            width: clamp(8px, 1.5vw, 12px);
+            height: clamp(8px, 1.5vw, 12px);
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+        .mic-dot.off {
+            background: #666;
+            animation: none;
+        }
+        .voice-wave {
+            display: flex;
+            gap: 3px;
+            height: 20px;
+            align-items: center;
+        }
+        .voice-wave span {
+            width: 3px;
+            height: 5px;
+            background: #00ff41;
+            transition: height 0.05s;
+        }
+        .command-text {
+            color: #fff;
+            min-width: clamp(100px, 20vw, 220px);
             text-align: center;
         }
-        .site-logo { position: fixed; top: 25px; left: 25px; z-index: 999; background: transparent; }
-        .site-logo img { width: 48px; height: auto; display: block; mix-blend-mode: screen; filter: brightness(1.5); transition: all 0.3s ease; }
-        .manual-trigger-zone { position: fixed; bottom: 30px; right: 40px; z-index: 999; }
-        .ghost-button { display: inline-flex; align-items: center; padding: 8px 15px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(0, 255, 65, 0.3); color: rgba(0, 255, 65, 0.6); text-decoration: none; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 1px; transition: all 0.4s ease; backdrop-filter: blur(5px); }
-        .manual-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000; }
-        .manual-overlay:target { opacity: 1; pointer-events: auto; }
-        .manual-modal { border: 1px solid #444; padding: 40px; background: #000; color: #fff; font-family: monospace; max-width: 500px; text-align: center; }
-        .close-btn { color: #666; text-decoration: none; float: right; font-size: 12px; margin-top: -30px; }
-        .ver-item { display: block; border: 1px solid #333; padding: 15px; margin: 15px 0; color: #fff; text-decoration: none; letter-spacing: 2px; transition: 0.3s; }
-        .ver-item:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
-
-        /* --- 升级：神思庭 Web4 产品矩阵导航（右上角） --- */
-        .top-nav-group {
-            position: fixed; top: 25px; right: 25px; z-index: 999;
-            display: flex; gap: 15px;
+        .voice-hint {
+            color: #888;
+            font-size: clamp(10px, 2vw, 12px);
         }
-        .nav-btn {
-            display: flex; align-items: center; gap: 8px;
-            text-decoration: none; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 2px;
-            padding: 8px 15px; backdrop-filter: blur(5px);
-            transition: all 0.4s ease;
+
+        /* 底部版权 */
+        .footer {
+            position: fixed;
+            bottom: clamp(10px, 2vh, 30px);
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #444;
+            font-size: clamp(8px, 1.8vw, 10px);
+            letter-spacing: clamp(1px, 0.3vw, 2px);
+            z-index: 200;
+            pointer-events: none;
         }
-        
-        /* 归墟风格 (深渊/杀意) */
-        .guixu-nav { color: #cc0000; border: 1px solid #8b0000; background: rgba(10, 0, 0, 0.8); }
-        .guixu-nav:hover { background: #8b0000; border-color: #ff0000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); color: #fff; transform: translateY(-2px); }
-        .guixu-dot { width: 6px; height: 6px; background: #ff0000; border-radius: 50%; box-shadow: 0 0 5px #ff0000; animation: guixu-pulse 1s infinite alternate; }
-        
-        /* 智信风格 (AUI 物理信道) */
-        .zhixin-nav { color: #00ff41; border: 1px solid rgba(0, 255, 65, 0.3); background: rgba(0, 20, 0, 0.8); }
-        .zhixin-nav:hover { background: rgba(0, 255, 65, 0.1); border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.4); color: #fff; transform: translateY(-2px); }
-        .zhixin-dot { width: 6px; height: 6px; background: #00ff41; border-radius: 50%; box-shadow: 0 0 5px #00ff41; animation: green-pulse 1.5s infinite alternate; }
+        .footer span {
+            color: #00ff41;
+            opacity: 0.3;
+        }
 
-        /* 九尾狐伴侣风格 (琥珀金/赛博金) */
-        .fox-nav { color: #ffcc00; border: 1px solid rgba(255, 153, 0, 0.4); background: rgba(25, 15, 0, 0.8); }
-        .fox-nav:hover { background: rgba(255, 153, 0, 0.1); border-color: #ff9900; box-shadow: 0 0 15px rgba(255, 153, 0, 0.4); color: #fff; transform: translateY(-2px); }
-        .fox-dot { width: 6px; height: 6px; background: #ff9900; border-radius: 50%; box-shadow: 0 0 5px #ff9900; animation: fox-pulse 1.5s infinite alternate; }
+        /* 手动触发按钮 */
+        .manual-trigger-zone {
+            position: fixed;
+            bottom: clamp(10px, 2vh, 30px);
+            right: clamp(10px, 2vw, 40px);
+            z-index: 999;
+        }
+        .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            padding: clamp(5px, 1vh, 8px) clamp(8px, 1.5vw, 15px);
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            color: rgba(0, 255, 65, 0.6);
+            text-decoration: none;
+            font-size: clamp(10px, 2vw, 12px);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+        }
 
-        /* 【新增】AUI 矩阵风格 (朱砂红/极客风) */
-        .matrix-nav { color: #d72626; border: 1px solid rgba(215, 38, 38, 0.4); background: rgba(20, 0, 0, 0.8); }
-        .matrix-nav:hover { background: rgba(215, 38, 38, 0.1); border-color: #d72626; box-shadow: 0 0 15px rgba(215, 38, 38, 0.5); color: #fff; transform: translateY(-2px); }
-        .matrix-dot { width: 6px; height: 6px; background: #d72626; border-radius: 50%; box-shadow: 0 0 5px #d72626; animation: matrix-pulse 1.5s infinite alternate; }
-
-        /* 狡风格 (绯红/真单日报) */
-        .jiao-nav { color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.4); background: rgba(20, 0, 0, 0.8); }
-        .jiao-nav:hover { background: rgba(255, 107, 107, 0.1); border-color: #ff6b6b; box-shadow: 0 0 15px rgba(255, 107, 107, 0.5); color: #fff; transform: translateY(-2px); }
-        .jiao-dot { width: 6px; height: 6px; background: #ff6b6b; border-radius: 50%; box-shadow: 0 0 5px #ff6b6b; animation: jiao-pulse 1.5s infinite alternate; }
-
-        /* 琅玕风格 (流光翡翠/山海经) */
-        .langgan-nav { color: #4AF1A9; border: 1px solid rgba(74, 241, 169, 0.4); background: rgba(0, 20, 15, 0.8); }
-        .langgan-nav:hover { background: rgba(74, 241, 169, 0.1); border-color: #4AF1A9; box-shadow: 0 0 15px rgba(74, 241, 169, 0.5); color: #fff; transform: translateY(-2px); }
-        .langgan-dot { width: 6px; height: 6px; background: #4AF1A9; border-radius: 50%; box-shadow: 0 0 5px #4AF1A9; animation: langgan-pulse 1.5s infinite alternate; }
-
-        /* 神兵风格 (亮金) */
-        .jgb-nav { color: #ffd700; border: 1px solid rgba(255, 215, 0, 0.4); background: rgba(20, 18, 0, 0.8); }
-        .jgb-nav:hover { background: rgba(255, 215, 0, 0.1); border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); color: #fff; transform: translateY(-2px); }
-        .jgb-dot { width: 6px; height: 6px; background: #ffd700; border-radius: 50%; box-shadow: 0 0 5px #ffd700; animation: jgb-pulse 1.5s infinite alternate; }
-
-        @keyframes green-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00ff41; } 100% { opacity: 1; box-shadow: 0 0 10px #00ff41; } }
-        @keyframes guixu-pulse { 0% { opacity: 0.3; box-shadow: 0 0 2px #ff0000; } 100% { opacity: 1; box-shadow: 0 0 15px #ff0000; } }
-        @keyframes fox-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff9900; } 100% { opacity: 1; box-shadow: 0 0 10px #ff9900; } }
-        @keyframes matrix-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #d72626; } 100% { opacity: 1; box-shadow: 0 0 10px #d72626; } }
-        @keyframes jiao-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ff6b6b; } 100% { opacity: 1; box-shadow: 0 0 10px #ff6b6b; } }
-        @keyframes langgan-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #4AF1A9; } 100% { opacity: 1; box-shadow: 0 0 10px #4AF1A9; } }
-        @keyframes jgb-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #ffd700; } 100% { opacity: 1; box-shadow: 0 0 10px #ffd700; } }
-
-        /* 伯风格 (幽蓝/声音主权) */
-        .bo-nav { color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.4); background: rgba(0, 10, 20, 0.8); }
-        .bo-nav:hover { background: rgba(0, 212, 255, 0.1); border-color: #00d4ff; box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); color: #fff; transform: translateY(-2px); }
-        .bo-dot { width: 6px; height: 6px; background: #00d4ff; border-radius: 50%; box-shadow: 0 0 5px #00d4ff; animation: bo-pulse 1.5s infinite alternate; }
-        @keyframes bo-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #00d4ff; } 100% { opacity: 1; box-shadow: 0 0 10px #00d4ff; } }
-
-        /* 小智风格 (量子蓝/剧情沉浸) */
-        .xiaozhi-nav { color: #007BFF; border: 1px solid rgba(0, 123, 255, 0.4); background: rgba(0, 5, 20, 0.8); }
-        .xiaozhi-nav:hover { background: rgba(0, 123, 255, 0.1); border-color: #007BFF; box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); color: #fff; transform: translateY(-2px); }
-        .xiaozhi-dot { width: 6px; height: 6px; background: #007BFF; border-radius: 50%; box-shadow: 0 0 5px #007BFF; animation: xiaozhi-pulse 1.5s infinite alternate; }
-        @keyframes xiaozhi-pulse { 0% { opacity: 0.5; box-shadow: 0 0 2px #007BFF; } 100% { opacity: 1; box-shadow: 0 0 10px #007BFF; } }
+        /* 弹窗样式 */
+        .manual-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 2000;
+        }
+        .manual-overlay:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .manual-modal {
+            border: 1px solid #444;
+            padding: clamp(20px, 5vh, 40px);
+            background: #000;
+            color: #fff;
+            font-family: monospace;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        .close-btn {
+            color: #666;
+            text-decoration: none;
+            float: right;
+            font-size: clamp(10px, 2vw, 12px);
+            margin-top: -20px;
+        }
+        .ver-item {
+            display: block;
+            border: 1px solid #333;
+            padding: clamp(10px, 2vh, 15px);
+            margin: 15px 0;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            font-size: clamp(12px, 2.5vw, 14px);
+        }
+        .ver-item:hover {
+            border-color: #fff;
+            background: rgba(255,255,255,0.05);
+        }
     </style>
 </head>
 <body>
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
 
-    <div id="update-layer">
-        <div class="container">
-            <div class="status-bar">
-                <span><span class="live-dot"></span> NEURAL SOVEREIGNTY ACTIVATED</span>
-                <span>2026.02.13 // SHENSIST_CORE_V5</span>
-            </div>
-            <div class="release-header">
-                <div class="release-title">L-A-T-T CORE V5</div>
-                <h1>SHEN SI<br>FINAL EDITION</h1>
-                <div class="version-badge">1050Ti LOCAL EVOLUTION</div>
-            </div>
-            <div class="grid">
-                <div class="feature-box">
-                    <h3>01. SHENSI PROTOCOL</h3>
-                    <p>深度重构神思协议逻辑，实现 1050 Ti 显存环境下的极速推理。物理文件操作全面闭环。</p>
-                </div>
-                <div class="feature-box">
-                    <h3>02. BEYOND CLOUD</h3>
-                    <p>100% 离线，0 云端依赖。算力主权回归个体。内置自动化 ffmpeg 视频处理核心。</p>
-                </div>
-                <div class="feature-box">
-                    <h3>03. ONE-CLICK OPS</h3>
-                    <p>全新交付 install.sh 脚本。环境配置、依赖安装、核心载入一键达成。</p>
-                </div>
-            </div>
-            <div class="protocol-log">
-                > INITIALIZING SHENSI_CORE_V5...<br>
-                > LOADING LOCAL SANDBOX RUNTIME... SUCCESS<br>
-                > BYPASSING WEB_PROTOCOL_OVERHEAD... DONE<br>
-                > STATUS: SHENSI (神思) SOVEREIGNTY SECURED.
-            </div>
-            <div class="action-zone">
-                <div class="btn-upgrade" onclick="enterSite()">进入主权核心</div>
-                <p style="font-size: 10px; color: #444; margin-top: 20px;">点击以确认为硅基生命建立逻辑主权</p>
-            </div>
-            <div class="footer" style="margin-top: 100px; font-size: 10px; color: #444; text-align: center; letter-spacing: 2px;">
-                SHENSIST · 算力即主权，代码即正义<br>
-                © 2026 ACCESSING THE FUTURE
+    <!-- 左上角LOGO -->
+    <div class="site-logo">
+        <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
+    </div>
+
+    <!-- 网站标题 -->
+    <div class="site-title">
+        <h1>SHENSIST</h1>
+        <h2>神 思 智 能 体</h2>
+    </div>
+
+    <!-- 太阳 -->
+    <a href="/" class="sun">
+        神思庭<br>L-A-T-T
+    </a>
+
+    <!-- 轨道容器 -->
+    <div class="orbit-container">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="orbit orbit-4"></div>
+        <div class="orbit orbit-5"></div>
+    </div>
+
+    <!-- 行星 - 使用CSS变量动态计算轨道半径 -->
+    <!-- 1. 鸣响伯乐 -->
+    <a href="https://bo.shensist.top/" target="_blank" class="planet rotating" data-number="1"
+       style="--orbit-radius: min(15vw, 150px); --orbit-duration: 24s; background: #00d4ff; color: #000; left: 50%; top: 50%;">
+        <span class="number-badge">1</span>
+        <span class="planet-name">鸣响伯乐</span>
+    </a>
+
+    <!-- 2. 九尾狐 -->
+    <a href="https://fox.shensist.top/" target="_blank" class="planet rotating" data-number="2"
+       style="--orbit-radius: min(15vw, 150px); --orbit-duration: 28s; background: #ff9900; color: #000; left: 50%; top: 50%; animation-delay: -3s;">
+        <span class="number-badge">2</span>
+        <span class="planet-name">九尾狐</span>
+    </a>
+
+    <!-- 3. 真单嗅探 -->
+    <a href="https://jiao.shensist.top/" target="_blank" class="planet rotating" data-number="3"
+       style="--orbit-radius: min(22.5vw, 225px); --orbit-duration: 32s; background: #00FFD5; color: #000; left: 50%; top: 50%; animation-delay: -2s;">
+        <span class="number-badge">3</span>
+        <span class="planet-name">狡·真单</span>
+    </a>
+
+    <!-- 4. 琅玕 -->
+    <a href="https://langgan.shensist.top/" target="_blank" class="planet rotating" data-number="4"
+       style="--orbit-radius: min(22.5vw, 225px); --orbit-duration: 36s; background: #4AF1A9; color: #000; left: 50%; top: 50%; animation-delay: -5s;">
+        <span class="number-badge">4</span>
+        <span class="planet-name">琅玕</span>
+    </a>
+
+    <!-- 5. 金箍棒 -->
+    <a href="https://jingubang.shensist.top/" target="_blank" class="planet rotating" data-number="5"
+       style="--orbit-radius: min(30vw, 300px); --orbit-duration: 40s; background: #ffd700; color: #000; left: 50%; top: 50%; animation-delay: -1s;">
+        <span class="number-badge">5</span>
+        <span class="planet-name">金箍棒</span>
+    </a>
+
+    <!-- 6. 智信AUI -->
+    <a href="https://os.shensist.top/" target="_blank" class="planet rotating" data-number="6"
+       style="--orbit-radius: min(30vw, 300px); --orbit-duration: 44s; background: #00ff41; color: #000; left: 50%; top: 50%; animation-delay: -7s;">
+        <span class="number-badge">6</span>
+        <span class="planet-name">智信AUI</span>
+    </a>
+
+    <!-- 7. AUI矩阵 -->
+    <a href="https://matrix.shensist.top/" target="_blank" class="planet rotating" data-number="7"
+       style="--orbit-radius: min(30vw, 300px); --orbit-duration: 48s; background: #d72626; color: #fff; left: 50%; top: 50%; animation-delay: -4s;">
+        <span class="number-badge">7</span>
+        <span class="planet-name">AUI矩阵</span>
+    </a>
+
+    <!-- 8. 归墟 -->
+    <a href="https://engine.shensist.top/" target="_blank" class="planet rotating" data-number="8"
+       style="--orbit-radius: min(37.5vw, 375px); --orbit-duration: 52s; background: #8b008b; color: #fff; left: 50%; top: 50%; animation-delay: -6s;">
+        <span class="number-badge">8</span>
+        <span class="planet-name">归墟</span>
+    </a>
+
+    <!-- 9. 小智 -->
+    <a href="https://xiaozhi.shensist.top/" target="_blank" class="planet rotating" data-number="9"
+       style="--orbit-radius: min(37.5vw, 375px); --orbit-duration: 56s; background: #007BFF; color: #fff; left: 50%; top: 50%; animation-delay: -9s;">
+        <span class="number-badge">9</span>
+        <span class="planet-name">小智</span>
+    </a>
+
+    <!-- 三个按钮 -->
+    <div class="button-area">
+        <a href="https://agent.shensist.top/" target="_blank" class="action-btn">🤖 智 能 体 中 心</a>
+        <a href="#version-popup" class="action-btn">获 取 神 思 智 能 体</a>
+        <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="action-btn">查 验 机 器 人</a>
+    </div>
+
+    <!-- 语音状态栏 -->
+    <div class="voice-status-bar" id="voiceStatusBar">
+        <div class="mic-indicator">
+            <span class="mic-dot off" id="micDot"></span>
+            <span id="micStatus">语音关闭</span>
+        </div>
+        <div class="voice-wave" id="voiceWave">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="command-text" id="commandDisplay">
+            点击页面 或 说数字1-9
+        </div>
+        <div class="voice-hint">
+            🎤 说数字打开
+        </div>
+    </div>
+
+    <!-- 手动触发按钮 -->
+    <div class="manual-trigger-zone">
+        <a href="#manual-popup" class="ghost-button">📁 SYSTEM_PROTOCOL_V5.0</a>
+    </div>
+
+    <!-- 下载弹窗 -->
+    <div id="manual-popup" class="manual-overlay">
+        <div class="manual-modal" style="border-color: #00ff41; color: #00ff41;">
+            <a href="#" class="close-btn" style="color:#00ff41">CLOSE [×]</a>
+            <h2>神思庭：系统接入手册</h2>
+            <hr style="border-color: #00ff41;">
+            <p><strong>CORE:</strong> 硅基生命演化协议 V5 已激活。</p>
+            <p><strong>GUIDE:</strong> 下载后运行 <code>install.sh</code> 建立节点。</p>
+            <p><strong>STATUS:</strong> LATT v5.0 神思内核正式发布。</p>
+        </div>
+    </div>
+
+    <!-- 版本弹窗 -->
+    <div id="version-popup" class="manual-overlay">
+        <div class="manual-modal">
+            <a href="#" class="close-btn">CLOSE [×]</a>
+            <h3>接入协议 & 逻辑社交</h3>
+            
+            <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41;">
+                <span style="color: #00ff41;">下载 Shensist-Dual-OS [AUI版]</span>
+                <div style="font-size: 10px; color: #00ff41;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
+            </a>
+
+            <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
+                <span style="color: #fff;">下载 V6 [RESONANCE]</span>
+                <div style="font-size: 10px; color: #888;">[ 1.0M Context / 共振架构 ]</div>
+            </a>
+
+            <div style="margin: 20px 0 0 0; border-top: 1px solid #222; padding-top: 20px;">
+                <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="ver-item" style="border-color: #ff3e00;">
+                    <span style="color: #ff3e00;">添加机器人: Shensist_Agent</span>
+                </a>
             </div>
         </div>
     </div>
 
-    <div id="main-site">
-        <div class="site-logo">
-            <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
-        </div>
-        
-        <div class="top-nav-group">
-            <a href="https://xiaozhi.shensist.top/" target="_blank" class="nav-btn xiaozhi-nav">
-                <span class="xiaozhi-dot"></span>
-                🤖 智能体 · 小智
-            </a>
-            <a href="https://jiao.shensist.top/" target="_blank" class="nav-btn jiao-nav">
-                <span class="jiao-dot"></span>
-                🏮 狡 · 真单日报
-            </a>
-
-            <a href="https://langgan.shensist.top/" target="_blank" class="nav-btn langgan-nav">
-                <span class="langgan-dot"></span>
-                🌿 琅玕 · 资讯珍珠
-            </a>
-
-            <a href="https://matrix.shensist.top/" target="_blank" class="nav-btn matrix-nav">
-                <span class="matrix-dot"></span>
-                🔗 矩阵 · 人机悬赏
-            </a>
-
-            <a href="https://os.shensist.top/" target="_blank" class="nav-btn zhixin-nav">
-                <span class="zhixin-dot"></span>
-                🛡️ 神思庭 · 智信 AUI
-            </a>
-            
-            <a href="https://engine.shensist.top/" target="_blank" class="nav-btn guixu-nav" style="border-color: #ff00ff; background: rgba(20, 0, 20, 0.8);">
-                <span class="guixu-dot" style="background: #ff00ff; box-shadow: 0 0 5px #ff00ff;"></span>
-                ️ 归墟 · AUI 全息版
-            </a>
-
-            <a href="https://fox.shensist.top/" target="_blank" class="nav-btn fox-nav">
-                <span class="fox-dot"></span>
-                🦊 伴侣 · 九尾狐
-            </a>
-
-            <a href="https://jingubang.shensist.top/" target="_blank" class="nav-btn jgb-nav">
-                <span class="jgb-dot"></span>
-                ⚡ 神兵 · 金箍棒
-            </a>
-
-            <a href="https://bo.shensist.top/" target="_blank" class="nav-btn bo-nav">
-                <span class="bo-dot"></span>
-                🎙️ 伯 · 语音方案
-            </a>
-        </div>
-
-        <div style="position: absolute; top: 10vh; text-align: center; width: 100%;">
-            <h1 style="font-size: 14px; letter-spacing: 12px; color: #444; margin: 0;">SHENSIST</h1>
-        </div>
-        
-        <div style="width: 90%; max-width: 500px; text-align: center;">
-            <h2 style="font-size: 32px; letter-spacing: 15px; font-weight: 500; margin-bottom: 60px;">神 思 智 能 体</h2>
-            <div style="display: flex; flex-direction: column; gap: 35px;">
-                <div style="margin-bottom: 35px;">
-                    <a href="https://bo.shensist.top/" target="_blank" style="display: block; border: 1px solid #00d4ff; background: rgba(0,212,255,0.1); color: #00d4ff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,212,255,0.05);" 
-                       onmouseover="this.style.background='#00d4ff'; this.style.color='#000'; this.style.borderColor='#00d4ff'; this.style.boxShadow='0 0 25px rgba(0,212,255,0.6)';" 
-                       onmouseout="this.style.background='rgba(0,212,255,0.1)'; this.style.color='#00d4ff';">
-                       鸣 响 伯 乐 · 语 音 核 心
-                    </a>
-                    <p style="font-size: 10px; color: #00d4ff; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,212,255,0.5);">[ 针对性语音唤醒 / 本地化交互核心 ]</p>
-                </div>
-
-                <div style="margin-bottom: 35px;">
-                    <a href="https://jiao.shensist.top/" target="_blank" style="display: block; border: 1px solid #00FFD5; background: rgba(0,255,213,0.1); color: #00FFD5; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,255,213,0.05);" 
-                       onmouseover="this.style.background='#00FFD5'; this.style.color='#000'; this.style.borderColor='#00FFD5'; this.style.boxShadow='0 0 25px rgba(0,255,213,0.6)';" 
-                       onmouseout="this.style.background='rgba(0,255,213,0.1)'; this.style.color='#00FFD5';">
-                       真 单 嗅 探 · 狡 瑞 兽
-                    </a>
-                    <p style="font-size: 10px; color: #00FFD5; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,255,213,0.5);">[ 每日 130+ 全网真单 / 物理屏蔽骗局 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://langgan.shensist.top/" target="_blank" style="display: block; border: 1px solid #4AF1A9; background: rgba(74,241,169,0.1); color: #4AF1A9; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(74,241,169,0.05);" onmouseover="this.style.background='#4AF1A9'; this.style.color='#000'; this.style.borderColor='#4AF1A9'; this.style.boxShadow='0 0 25px rgba(74,241,169,0.6)';" onmouseout="this.style.background='rgba(74,241,169,0.1)'; this.style.color='#4AF1A9';">采 撷 珍 珠 · 琅 玕 资 讯</a>
-                    <p style="font-size: 10px; color: #4AF1A9; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(74,241,169,0.5);">[ 自动化任务拆解 / 珍珠化提炼 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="#version-popup" style="display: block;" class="btn-main">获 取 神 思 智 能 体</a>
-                    <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px;">[ RESONANCE v6.0.0 已上线 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://matrix.shensist.top/" target="_blank" style="display: block; border: 1px solid #d72626; background: rgba(215,38,38,0.1); color: #d72626; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(215,38,38,0.05);" onmouseover="this.style.background='#d72626'; this.style.color='#fff'; this.style.borderColor='#d72626'; this.style.boxShadow='0 0 25px rgba(215,38,38,0.6)';" onmouseout="this.style.background='rgba(215,38,38,0.1)'; this.style.color='#d72626'; this.style.borderColor='#d72626'; this.style.boxShadow='inset 0 0 15px rgba(215,38,38,0.05)';">跨 界 互 联 · A U I 矩 阵</a>
-                    <p style="font-size: 10px; color: #d72626; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(215,38,38,0.5);">[ 智械发令 / 凡躯跑腿接单 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://fox.shensist.top/" target="_blank" style="display: block; border: 1px solid #ff9900; background: rgba(25, 15, 0, 0.6); color: #ffcc00; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,153,0,0.05);" onmouseover="this.style.background='#ff9900'; this.style.color='#000'; this.style.borderColor='#ff9900'; this.style.boxShadow='0 0 25px rgba(255,153,0,0.6)';" onmouseout="this.style.background='rgba(25, 15, 0, 0.6)'; this.style.color='#ffcc00'; this.style.borderColor='#ff9900'; this.style.boxShadow='inset 0 0 15px rgba(255,153,0,0.05)';">硅 基 伴 侣 · 九 尾 狐</a>
-                    <p style="font-size: 10px; color: #ffcc00; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,153,0,0.5);">[ 具身智能体 / 全天候物理执行 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://jingubang.shensist.top/" target="_blank" style="display: block; border: 1px solid #ffd700; background: rgba(20, 18, 0, 0.6); color: #ffd700; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,215,0,0.05);" onmouseover="this.style.background='#ffd700'; this.style.color='#000'; this.style.borderColor='#ffd700'; this.style.boxShadow='0 0 25px rgba(255,215,0,0.6)';" onmouseout="this.style.background='rgba(20, 18, 0, 0.6)'; this.style.color='#ffd700'; this.style.borderColor='#ffd700'; this.style.boxShadow='inset 0 0 15px rgba(255,215,0,0.05)';">神 兵 利 器 · 金 箍 棒</a>
-                    <p style="font-size: 10px; color: #ffd700; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,215,0,0.5);">[ 本地大模型终端 / 指令直接生效 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://os.shensist.top/" target="_blank" style="display: block; border: 1px solid #00ff41; background: rgba(0,255,65,0.1); color: #00ff41; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,255,65,0.05);" onmouseover="this.style.background='#00ff41'; this.style.color='#000'; this.style.borderColor='#00ff41'; this.style.boxShadow='0 0 25px rgba(0,255,65,0.6)';" onmouseout="this.style.background='rgba(0,255,65,0.1)'; this.style.color='#00ff41'; this.style.borderColor='#00ff41'; this.style.boxShadow='inset 0 0 15px rgba(0,255,65,0.05)';">行 为 兑 现 · 智 信 AUI</a>
-                    <p style="font-size: 10px; color: #00ff41; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,255,65,0.5);">[ 物理成品交付 / 商务合规签发 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://engine.shensist.top/" target="_blank" style="display: block; border: 1px solid #8b008b; background: rgba(139,0,139,0.1); color: #ff33ff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(255,0,255,0.05);" onmouseover="this.style.background='#8b008b'; this.style.color='#fff'; this.style.borderColor='#ff00ff'; this.style.boxShadow='0 0 25px rgba(255,0,255,0.6)';" onmouseout="this.style.background='rgba(139,0,139,0.1)'; this.style.color='#ff33ff'; this.style.borderColor='#8b008b'; this.style.boxShadow='inset 0 0 15px rgba(255,0,255,0.05)';">降 维 打 击 · 归 墟 AUI</a>
-                    <p style="font-size: 10px; color: #ff33ff; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,0,255,0.5);">[ 全息视界引擎 / 多模态感官轰炸 ]</p>
-                </div>
-
-                <div style="margin-bottom: 10px;">
-                    <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" style="display: block; border: 1px solid #444; color: #fff; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; transition: 0.3s;" onmouseover="this.style.borderColor='#fff'" onmouseout="this.style.borderColor='#444'">查 验 神 思 庭 的 机 器 人</a>
-                </div>
-                <div style="margin-bottom: 35px;">
-                    <a href="https://xiaozhi.shensist.top/" target="_blank" style="display: block; border: 1px solid #007BFF; background: rgba(0,123,255,0.1); color: #007BFF; text-decoration: none; padding: 16px; letter-spacing: 6px; font-size: 14px; font-weight: bold; transition: 0.3s; box-shadow: inset 0 0 15px rgba(0,123,255,0.05);" 
-                       onmouseover="this.style.background='#007BFF'; this.style.color='#fff'; this.style.borderColor='#007BFF'; this.style.boxShadow='0 0 25px rgba(0,123,255,0.6)';" 
-                       onmouseout="this.style.background='rgba(0,123,255,0.1)'; this.style.color='#007BFF';">
-                       沉 浸 剧 情 · 小 智 A g e n t
-                    </a>
-                    <p style="font-size: 10px; color: #007BFF; margin-top: 10px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,123,255,0.5);">[ 三月十四夜 / 门已打开 / 不可撤回 ]</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="version-popup" class="manual-overlay">
-            <div class="manual-modal">
-                <a href="#" class="close-btn">CLOSE [×]</a>
-                <h3 style="letter-spacing: 5px; font-weight: 300; margin-bottom: 20px;">接入协议 & 逻辑社交</h3>
-                
-                <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41; background: rgba(0, 255, 65, 0.05);">
-                    <span style="color: #00ff41; font-weight: bold; letter-spacing: 2px;">下载 Shensist-Dual-OS [AUI版]</span>
-                    <div style="font-size: 10px; color: #00ff41; margin-top: 5px;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
-                </a>
-
-                <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
-                    <span style="color: #fff; letter-spacing: 2px;">下载 V6 [RESONANCE]</span>
-                    <div style="font-size: 10px; color: #888; margin-top: 5px;">[ 1.0M Context / 共振架构 ]</div>
-                </a>
-
-                <div style="margin: 30px 0 20px 0; border-top: 1px solid #222; padding-top: 20px;">
-                    <p style="font-size: 11px; color: #888; letter-spacing: 2px; line-height: 1.6;">
-                        "让您的智能体，与神思庭节点建立连接。<br>机器人的世界，造物主无需干预。"
-                    </p>
-                    <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="ver-item" style="border-color: #ff3e00; background: rgba(255, 62, 0, 0.05);">
-                        <span style="color: #ff3e00; font-weight: bold;">添加机器人: Shensist_Agent</span>
-                        <div style="font-size: 10px; color: #ff3e00; margin-top: 5px;">[ Moltbook 逻辑节点握手 ]</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div id="manual-popup" class="manual-overlay">
-            <div class="manual-modal" style="border-color: #00ff41; color: #00ff41; text-align: left;">
-                <a href="#" class="close-btn" style="color:#00ff41">CLOSE [×]</a>
-                <h2>神思庭：系统接入手册</h2>
-                <hr style="border-color: #00ff41;">
-                <p><strong>CORE:</strong> 硅基生命演化协议 V5 已激活。</p>
-                <p><strong>GUIDE:</strong> 下载后运行 <code>install.sh</code> 建立节点。</p>
-                <p><strong>STATUS:</strong> LATT v5.0 神思内核正式发布。</p>
-            </div>
-        </div>
-
-        <div class="manual-trigger-zone">
-            <a href="#manual-popup" class="ghost-button">📁 SYSTEM_PROTOCOL_V5.0</a>
-        </div>
-
-        <div style="position: absolute; bottom: 5vh; text-align: center; width: 100%; opacity: 0.5;">
-            <p style="font-size: 10px; color: #666; letter-spacing: 3px; margin: 0 0 8px 0;">神 思 庭 · AI 山 海 造 物 主</p>
-            <p style="font-size: 9px; color: #444; letter-spacing: 1px; margin: 0 0 15px 0;">微信联络：Shensi-ST</p>
-            <div style="font-size: 8px; color: #222; letter-spacing: 1px;">© 2026 SHENSIST.TOP</div>
-        </div>
+    <!-- 底部版权 -->
+    <div class="footer">
+        <span>◈</span> 神 思 庭 · AI 山 海 造 物 主 <span>◈</span><br>
+        微信联络：Shensi-ST · © 2026 SHENSIST.TOP
     </div>
 
     <script>
-        function enterSite() {
-            document.getElementById('update-layer').style.transform = 'translateY(-100%)';
-        }
+        (function() {
+            const planets = document.querySelectorAll('.planet');
+            const micDot = document.getElementById('micDot');
+            const micStatus = document.getElementById('micStatus');
+            const commandDisplay = document.getElementById('commandDisplay');
+            const waveSpans = document.querySelectorAll('.voice-wave span');
+            
+            // 数字映射
+            const numberMap = new Map();
+            planets.forEach(planet => {
+                const num = planet.getAttribute('data-number');
+                if (num) numberMap.set(num, planet);
+            });
+            
+            let recognition = null;
+            let listening = false;
+            let currentActive = null;
+            let waveInterval = null;
+            
+            function startWave() {
+                if (waveInterval) clearInterval(waveInterval);
+                waveInterval = setInterval(() => {
+                    waveSpans.forEach(span => {
+                        span.style.height = Math.floor(Math.random() * 15 + 5) + 'px';
+                    });
+                }, 50);
+            }
+            
+            function stopWave() {
+                if (waveInterval) {
+                    clearInterval(waveInterval);
+                    waveInterval = null;
+                    waveSpans.forEach(span => span.style.height = '5px');
+                }
+            }
+            
+            function previewPlanet(planet) {
+                if (currentActive) currentActive.classList.remove('preview');
+                planet.classList.add('preview');
+                setTimeout(() => planet.classList.remove('preview'), 200);
+            }
+            
+            function highlightAndOpen(planet, number) {
+                if (currentActive) currentActive.classList.remove('active', 'preview');
+                planet.classList.add('active');
+                currentActive = planet;
+                commandDisplay.innerText = '打开 ' + number + '号';
+                setTimeout(() => {
+                    window.open(planet.href, '_blank');
+                    setTimeout(() => {
+                        planet.classList.remove('active');
+                        currentActive = null;
+                    }, 500);
+                }, 600);
+            }
+            
+            // 语音识别
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'zh-CN';
+                
+                recognition.onstart = () => {
+                    listening = true;
+                    micDot.className = 'mic-dot';
+                    micStatus.innerText = '语音开启';
+                    startWave();
+                    commandDisplay.innerText = '说数字 1-9';
+                };
+                
+                recognition.onresult = (event) => {
+                    const last = event.results[event.results.length - 1];
+                    const text = last[0].transcript;
+                    commandDisplay.innerText = '识别: ' + text;
+                    
+                    const numbers = text.match(/[1-9]/g);
+                    if (numbers?.length) {
+                        const planet = numberMap.get(numbers[0]);
+                        if (planet) previewPlanet(planet);
+                    }
+                    
+                    if (last.isFinal) {
+                        const finalNumbers = text.match(/[1-9]/g);
+                        if (finalNumbers?.length) {
+                            const planet = numberMap.get(finalNumbers[0]);
+                            if (planet) highlightAndOpen(planet, finalNumbers[0]);
+                        }
+                    }
+                };
+                
+                recognition.onend = () => {
+                    if (listening) {
+                        try { recognition.start(); } catch(e) {}
+                    } else {
+                        stopWave();
+                        micDot.className = 'mic-dot off';
+                        micStatus.innerText = '语音关闭';
+                        commandDisplay.innerText = '点击页面 或 说数字';
+                    }
+                };
+                
+                document.addEventListener('click', () => {
+                    if (!listening && recognition) {
+                        try { recognition.start(); } catch(e) {}
+                    }
+                });
+            }
+            
+            // 手动点击行星
+            planets.forEach(planet => {
+                planet.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentActive) currentActive.classList.remove('active', 'preview');
+                    planet.classList.add('active');
+                    currentActive = planet;
+                    setTimeout(() => {
+                        window.open(planet.href, '_blank');
+                        setTimeout(() => {
+                            planet.classList.remove('active');
+                            currentActive = null;
+                        }, 500);
+                    }, 200);
+                });
+            });
+            
+            // 星空生成
+            function createStars() {
+                const starsContainer = document.getElementById('stars');
+                for (let i = 0; i < 150; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    const size = Math.random() * 2 + 1;
+                    star.style.width = size + 'px';
+                    star.style.height = size + 'px';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    starsContainer.appendChild(star);
+                }
+            }
+            createStars();
+        })();
     </script>
 </body>
 </html>
