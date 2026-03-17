@@ -106,7 +106,7 @@
             100% { box-shadow: 0 0 clamp(50px, 12vw, 100px) #ffaa00; }
         }
 
-        /* 轨道容器 - 使用视口单位 */
+        /* 轨道容器 */
         .orbit-container {
             position: absolute;
             top: 50%;
@@ -126,7 +126,6 @@
             pointer-events: none;
         }
         
-        /* 动态轨道半径 - 使用视口单位 */
         .orbit-1 { width: min(30vw, 300px); height: min(30vw, 300px); }
         .orbit-2 { width: min(45vw, 450px); height: min(45vw, 450px); }
         .orbit-3 { width: min(60vw, 600px); height: min(60vw, 600px); }
@@ -207,7 +206,6 @@
             pointer-events: none;
         }
 
-        /* 公转动画 */
         @keyframes rotate-orbit {
             from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
             to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
@@ -217,62 +215,38 @@
             animation-duration: calc(var(--orbit-duration) * 2);
         }
 
-        /* 按钮区域 */
-        .button-area {
-            position: absolute;
-            bottom: clamp(100px, 20vh, 180px);
-            left: 50%;
-            transform: translateX(-50%);
+        /* ===== 底部布局重构 ===== */
+        .bottom-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 500;
             display: flex;
-            gap: clamp(10px, 2vw, 20px);
-            z-index: 300;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 90%;
-            max-width: 800px;
-        }
-        .action-btn {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff41;
-            color: #00ff41;
-            text-decoration: none;
-            padding: clamp(8px, 2vh, 12px) clamp(12px, 3vw, 25px);
-            font-size: clamp(11px, 2.5vw, 14px);
-            letter-spacing: clamp(1px, 0.5vw, 2px);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-            border-radius: 40px;
-            font-weight: bold;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
-            white-space: nowrap;
-        }
-        .action-btn:hover {
-            background: #00ff41;
-            color: #000;
-            box-shadow: 0 0 40px #00ff41;
-            transform: scale(1.05);
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            pointer-events: none;
         }
 
         /* 语音状态栏 */
         .voice-status-bar {
-            position: fixed;
-            bottom: clamp(160px, 30vh, 280px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             border: 1px solid #00ff41;
             border-radius: 40px;
-            padding: clamp(8px, 1.5vh, 12px) clamp(15px, 3vw, 30px);
+            padding: 12px 25px;
             display: flex;
-            gap: clamp(10px, 2vw, 25px);
+            gap: 20px;
             align-items: center;
-            z-index: 2000;
             backdrop-filter: blur(10px);
-            font-size: clamp(11px, 2.2vw, 14px);
+            font-size: clamp(12px, 2.5vw, 14px);
             flex-wrap: wrap;
             justify-content: center;
             width: 90%;
             max-width: 600px;
+            pointer-events: auto;
+            margin-bottom: 5px;
         }
         .mic-indicator {
             display: flex;
@@ -280,8 +254,8 @@
             gap: 8px;
         }
         .mic-dot {
-            width: clamp(8px, 1.5vw, 12px);
-            height: clamp(8px, 1.5vw, 12px);
+            width: 12px;
+            height: 12px;
             background: #ff0000;
             border-radius: 50%;
             animation: pulse 1s infinite;
@@ -312,42 +286,71 @@
             font-size: clamp(10px, 2vw, 12px);
         }
 
-        /* 底部版权 */
+        /* 按钮区域 */
+        .button-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 800px;
+            pointer-events: auto;
+            margin-bottom: 5px;
+        }
+        .action-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: clamp(12px, 2.5vw, 14px);
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            white-space: nowrap;
+        }
+        .action-btn:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 40px #00ff41;
+        }
+
+        /* 底部版权 - 放在最下面 */
         .footer {
-            position: fixed;
-            bottom: clamp(10px, 2vh, 30px);
-            left: 0;
-            width: 100%;
-            text-align: center;
             color: #444;
             font-size: clamp(8px, 1.8vw, 10px);
-            letter-spacing: clamp(1px, 0.3vw, 2px);
-            z-index: 200;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 100%;
             pointer-events: none;
+            margin-top: 5px;
         }
         .footer span {
             color: #00ff41;
             opacity: 0.3;
         }
 
-        /* 手动触发按钮 */
+        /* 手动触发按钮 - 独立放在右下角 */
         .manual-trigger-zone {
             position: fixed;
-            bottom: clamp(10px, 2vh, 30px);
-            right: clamp(10px, 2vw, 40px);
-            z-index: 999;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            pointer-events: auto;
         }
         .ghost-button {
-            display: inline-flex;
-            align-items: center;
-            padding: clamp(5px, 1vh, 8px) clamp(8px, 1.5vw, 15px);
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 255, 65, 0.3);
-            color: rgba(0, 255, 65, 0.6);
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff41;
+            color: #00ff41;
             text-decoration: none;
-            font-size: clamp(10px, 2vw, 12px);
-            backdrop-filter: blur(5px);
+            font-size: 12px;
             border-radius: 20px;
+            backdrop-filter: blur(5px);
         }
 
         /* 弹窗样式 */
@@ -357,8 +360,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.95);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -372,36 +374,47 @@
             pointer-events: auto;
         }
         .manual-modal {
-            border: 1px solid #444;
-            padding: clamp(20px, 5vh, 40px);
+            border: 2px solid #00ff41;
+            padding: 30px;
             background: #000;
             color: #fff;
-            font-family: monospace;
             max-width: 500px;
             width: 90%;
             text-align: center;
+            border-radius: 10px;
         }
         .close-btn {
-            color: #666;
+            color: #00ff41;
             text-decoration: none;
             float: right;
-            font-size: clamp(10px, 2vw, 12px);
-            margin-top: -20px;
+            font-size: 14px;
         }
         .ver-item {
             display: block;
             border: 1px solid #333;
-            padding: clamp(10px, 2vh, 15px);
+            padding: 15px;
             margin: 15px 0;
             color: #fff;
             text-decoration: none;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            font-size: clamp(12px, 2.5vw, 14px);
+            border-radius: 5px;
         }
         .ver-item:hover {
-            border-color: #fff;
-            background: rgba(255,255,255,0.05);
+            border-color: #00ff41;
+        }
+
+        /* 手机小屏特殊处理 */
+        @media (max-width: 480px) {
+            .voice-status-bar {
+                padding: 8px 15px;
+                gap: 8px;
+            }
+            .action-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            .bottom-container {
+                padding-bottom: 10px;
+            }
         }
     </style>
 </head>
@@ -434,63 +447,55 @@
         <div class="orbit orbit-5"></div>
     </div>
 
-    <!-- 行星 - 使用CSS变量动态计算轨道半径 -->
+    <!-- 行星 - 9个智能体 -->
     <!-- 1. 鸣响伯乐 -->
     <a href="https://bo.shensist.top/" target="_blank" class="planet rotating" data-number="1"
        style="--orbit-radius: min(15vw, 150px); --orbit-duration: 24s; background: #00d4ff; color: #000; left: 50%; top: 50%;">
         <span class="number-badge">1</span>
         <span class="planet-name">鸣响伯乐</span>
     </a>
-
     <!-- 2. 九尾狐 -->
     <a href="https://fox.shensist.top/" target="_blank" class="planet rotating" data-number="2"
        style="--orbit-radius: min(15vw, 150px); --orbit-duration: 28s; background: #ff9900; color: #000; left: 50%; top: 50%; animation-delay: -3s;">
         <span class="number-badge">2</span>
         <span class="planet-name">九尾狐</span>
     </a>
-
     <!-- 3. 真单嗅探 -->
     <a href="https://jiao.shensist.top/" target="_blank" class="planet rotating" data-number="3"
        style="--orbit-radius: min(22.5vw, 225px); --orbit-duration: 32s; background: #00FFD5; color: #000; left: 50%; top: 50%; animation-delay: -2s;">
         <span class="number-badge">3</span>
         <span class="planet-name">狡·真单</span>
     </a>
-
     <!-- 4. 琅玕 -->
     <a href="https://langgan.shensist.top/" target="_blank" class="planet rotating" data-number="4"
        style="--orbit-radius: min(22.5vw, 225px); --orbit-duration: 36s; background: #4AF1A9; color: #000; left: 50%; top: 50%; animation-delay: -5s;">
         <span class="number-badge">4</span>
         <span class="planet-name">琅玕</span>
     </a>
-
     <!-- 5. 金箍棒 -->
     <a href="https://jingubang.shensist.top/" target="_blank" class="planet rotating" data-number="5"
        style="--orbit-radius: min(30vw, 300px); --orbit-duration: 40s; background: #ffd700; color: #000; left: 50%; top: 50%; animation-delay: -1s;">
         <span class="number-badge">5</span>
         <span class="planet-name">金箍棒</span>
     </a>
-
     <!-- 6. 智信AUI -->
     <a href="https://os.shensist.top/" target="_blank" class="planet rotating" data-number="6"
        style="--orbit-radius: min(30vw, 300px); --orbit-duration: 44s; background: #00ff41; color: #000; left: 50%; top: 50%; animation-delay: -7s;">
         <span class="number-badge">6</span>
         <span class="planet-name">智信AUI</span>
     </a>
-
     <!-- 7. AUI矩阵 -->
     <a href="https://matrix.shensist.top/" target="_blank" class="planet rotating" data-number="7"
        style="--orbit-radius: min(30vw, 300px); --orbit-duration: 48s; background: #d72626; color: #fff; left: 50%; top: 50%; animation-delay: -4s;">
         <span class="number-badge">7</span>
         <span class="planet-name">AUI矩阵</span>
     </a>
-
     <!-- 8. 归墟 -->
     <a href="https://engine.shensist.top/" target="_blank" class="planet rotating" data-number="8"
        style="--orbit-radius: min(37.5vw, 375px); --orbit-duration: 52s; background: #8b008b; color: #fff; left: 50%; top: 50%; animation-delay: -6s;">
         <span class="number-badge">8</span>
         <span class="planet-name">归墟</span>
     </a>
-
     <!-- 9. 小智 -->
     <a href="https://xiaozhi.shensist.top/" target="_blank" class="planet rotating" data-number="9"
        style="--orbit-radius: min(37.5vw, 375px); --orbit-duration: 56s; background: #007BFF; color: #fff; left: 50%; top: 50%; animation-delay: -9s;">
@@ -498,31 +503,40 @@
         <span class="planet-name">小智</span>
     </a>
 
-    <!-- 三个按钮 -->
-    <div class="button-area">
-        <a href="https://agent.shensist.top/" target="_blank" class="action-btn">🤖 智 能 体 中 心</a>
-        <a href="#version-popup" class="action-btn">获 取 神 思 智 能 体</a>
-        <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="action-btn">查 验 机 器 人</a>
+    <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
+    <div class="bottom-container">
+        <!-- 语音状态栏 -->
+        <div class="voice-status-bar" id="voiceStatusBar">
+            <div class="mic-indicator">
+                <span class="mic-dot off" id="micDot"></span>
+                <span id="micStatus">语音关闭</span>
+            </div>
+            <div class="voice-wave" id="voiceWave">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="command-text" id="commandDisplay">
+                点击页面 或 说数字1-9
+            </div>
+            <div class="voice-hint">
+                🎤 说数字打开
+            </div>
+        </div>
+
+        <!-- 三个按钮 -->
+        <div class="button-area">
+            <a href="https://agent.shensist.top/" target="_blank" class="action-btn">🤖 智 能 体 中 心</a>
+            <a href="#version-popup" class="action-btn">获 取 神 思 智 能 体</a>
+            <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="action-btn">查 验 机 器 人</a>
+        </div>
+
+        <!-- 底部版权 -->
+        <div class="footer">
+            <span>◈</span> 神 思 庭 · AI 山 海 造 物 主 <span>◈</span><br>
+            微信联络：Shensi-ST · © 2026 SHENSIST.TOP
+        </div>
     </div>
 
-    <!-- 语音状态栏 -->
-    <div class="voice-status-bar" id="voiceStatusBar">
-        <div class="mic-indicator">
-            <span class="mic-dot off" id="micDot"></span>
-            <span id="micStatus">语音关闭</span>
-        </div>
-        <div class="voice-wave" id="voiceWave">
-            <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="command-text" id="commandDisplay">
-            点击页面 或 说数字1-9
-        </div>
-        <div class="voice-hint">
-            🎤 说数字打开
-        </div>
-    </div>
-
-    <!-- 手动触发按钮 -->
+    <!-- 手动触发按钮 - 独立放在右下角 -->
     <div class="manual-trigger-zone">
         <a href="#manual-popup" class="ghost-button">📁 SYSTEM_PROTOCOL_V5.0</a>
     </div>
@@ -563,12 +577,6 @@
         </div>
     </div>
 
-    <!-- 底部版权 -->
-    <div class="footer">
-        <span>◈</span> 神 思 庭 · AI 山 海 造 物 主 <span>◈</span><br>
-        微信联络：Shensi-ST · © 2026 SHENSIST.TOP
-    </div>
-
     <script>
         (function() {
             const planets = document.querySelectorAll('.planet');
@@ -577,7 +585,6 @@
             const commandDisplay = document.getElementById('commandDisplay');
             const waveSpans = document.querySelectorAll('.voice-wave span');
             
-            // 数字映射
             const numberMap = new Map();
             planets.forEach(planet => {
                 const num = planet.getAttribute('data-number');
@@ -626,7 +633,6 @@
                 }, 600);
             }
             
-            // 语音识别
             if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
                 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
                 recognition = new SpeechRecognition();
@@ -680,7 +686,6 @@
                 });
             }
             
-            // 手动点击行星
             planets.forEach(planet => {
                 planet.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -697,7 +702,6 @@
                 });
             });
             
-            // 星空生成
             function createStars() {
                 const starsContainer = document.getElementById('stars');
                 for (let i = 0; i < 150; i++) {
