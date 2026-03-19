@@ -131,6 +131,7 @@
         .orbit-3 { width: min(60vw, 600px); height: min(60vw, 600px); }
         .orbit-4 { width: min(75vw, 750px); height: min(75vw, 750px); }
         .orbit-5 { width: min(90vw, 900px); height: min(90vw, 900px); }
+        .orbit-6 { width: min(105vw, 1050px); height: min(105vw, 1050px); }
 
         /* 行星 */
         .planet {
@@ -445,6 +446,7 @@
         <div class="orbit orbit-3"></div>
         <div class="orbit orbit-4"></div>
         <div class="orbit orbit-5"></div>
+        <div class="orbit orbit-6"></div>
     </div>
 
     <!-- 行星 - 9个智能体 -->
@@ -502,6 +504,11 @@
         <span class="number-badge">9</span>
         <span class="planet-name">小智</span>
     </a>
+    <a href="https://i.shensist.top/" target="_blank" class="planet rotating" data-number="10"
+       style="--orbit-radius: min(45vw, 450px); --orbit-duration: 60s; background: #ff00ff; color: #fff; left: 50%; top: 50%; animation-delay: -12s;">
+        <span class="number-badge">10</span>
+        <span class="planet-name">我就要！</span>
+    </a>
 
     <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
     <div class="bottom-container">
@@ -515,10 +522,10 @@
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
             <div class="command-text" id="commandDisplay">
-                点击页面 或 说数字1-9
+                点击页面 或 说数字1-10
             </div>
             <div class="voice-hint">
-                🎤 说数字打开
+                🎤 说数字 1-10 打开
             </div>
         </div>
 
@@ -645,7 +652,7 @@
                     micDot.className = 'mic-dot';
                     micStatus.innerText = '语音开启';
                     startWave();
-                    commandDisplay.innerText = '说数字 1-9';
+                    commandDisplay.innerText = '说数字 1-10';
                 };
                 
                 recognition.onresult = (event) => {
@@ -653,14 +660,14 @@
                     const text = last[0].transcript;
                     commandDisplay.innerText = '识别: ' + text;
                     
-                    const numbers = text.match(/[1-9]/g);
+                    const numbers = text.match(/\d+/g);
                     if (numbers?.length) {
                         const planet = numberMap.get(numbers[0]);
                         if (planet) previewPlanet(planet);
                     }
                     
                     if (last.isFinal) {
-                        const finalNumbers = text.match(/[1-9]/g);
+                        const finalNumbers = text.match(/\d+/g);
                         if (finalNumbers?.length) {
                             const planet = numberMap.get(finalNumbers[0]);
                             if (planet) highlightAndOpen(planet, finalNumbers[0]);
