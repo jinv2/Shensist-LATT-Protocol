@@ -132,6 +132,7 @@
         .orbit-4 { width: min(75vw, 750px); height: min(75vw, 750px); }
         .orbit-5 { width: min(90vw, 900px); height: min(90vw, 900px); }
         .orbit-6 { width: min(105vw, 1050px); height: min(105vw, 1050px); }
+        .orbit-7 { width: min(120vw, 1200px); height: min(120vw, 1200px); }
 
         /* 行星 */
         .planet {
@@ -509,6 +510,11 @@
         <span class="number-badge">10</span>
         <span class="planet-name">我就要！</span>
     </a>
+    <a href="https://xq.shensist.top/" target="_blank" class="planet rotating" data-number="11"
+       style="--orbit-radius: min(52.5vw, 525px); --orbit-duration: 64s; background: #00ffd5; color: #000; left: 50%; top: 50%; animation-delay: -15s;">
+        <span class="number-badge">11</span>
+        <span class="planet-name">碗底青</span>
+    </a>
 
     <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
     <div class="bottom-container">
@@ -522,10 +528,10 @@
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
             <div class="command-text" id="commandDisplay">
-                点击页面 或 说数字1-10
+                点击页面 或 说数字1-11
             </div>
             <div class="voice-hint">
-                🎤 说数字 1-10 打开
+                🎤 说数字 1-11 打开
             </div>
         </div>
 
@@ -652,7 +658,7 @@
                     micDot.className = 'mic-dot';
                     micStatus.innerText = '语音开启';
                     startWave();
-                    commandDisplay.innerText = '说数字 1-10';
+                    commandDisplay.innerText = '说数字 1-11';
                 };
                 
                 recognition.onresult = (event) => {
@@ -682,7 +688,7 @@
                         stopWave();
                         micDot.className = 'mic-dot off';
                         micStatus.innerText = '语音关闭';
-                        commandDisplay.innerText = '点击页面 或 说数字';
+                        commandDisplay.innerText = '点击页面 或 说数字 1-11';
                     }
                 };
                 
