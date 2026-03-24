@@ -448,6 +448,7 @@
         <div class="orbit orbit-4"></div>
         <div class="orbit orbit-5"></div>
         <div class="orbit orbit-6"></div>
+        <div class="orbit orbit-7"></div>
     </div>
 
     <!-- 行星 - 9个智能体 -->
@@ -520,6 +521,11 @@
         <span class="number-badge">12</span>
         <span class="planet-name">双子演播室</span>
     </a>
+    <a href="https://genesis.shensist.top/" target="_blank" class="planet rotating" data-number="13"
+       style="--orbit-radius: min(67.5vw, 675px); --orbit-duration: 72s; background: #00ffaa; color: #000; left: 50%; top: 50%; animation-delay: -21s; border: 1px solid #fff;">
+        <span class="number-badge">13</span>
+        <span class="planet-name">创世</span>
+    </a>
 
     <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
     <div class="bottom-container">
@@ -533,10 +539,10 @@
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
             <div class="command-text" id="commandDisplay">
-                点击页面 或 说数字1-12
+                点击页面 或 说数字1-13
             </div>
             <div class="voice-hint">
-                🎤 说数字 1-12 打开
+                🎤 说数字 1-13 打开
             </div>
         </div>
 
@@ -663,7 +669,7 @@
                     micDot.className = 'mic-dot';
                     micStatus.innerText = '语音开启';
                     startWave();
-                    commandDisplay.innerText = '说数字 1-12';
+                    commandDisplay.innerText = '说数字 1-13';
                 };
                 
                 recognition.onresult = (event) => {
@@ -693,7 +699,7 @@
                         stopWave();
                         micDot.className = 'mic-dot off';
                         micStatus.innerText = '语音关闭';
-                        commandDisplay.innerText = '点击页面 或 说数字 1-11';
+                        commandDisplay.innerText = '点击页面 或 说数字 1-13';
                     }
                 };
                 
