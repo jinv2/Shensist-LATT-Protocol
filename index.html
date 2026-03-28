@@ -134,6 +134,7 @@
         .orbit-6 { width: min(105vw, 1050px); height: min(105vw, 1050px); }
         .orbit-7 { width: min(120vw, 1200px); height: min(120vw, 1200px); }
         .orbit-8 { width: min(135vw, 1350px); height: min(135vw, 1350px); }
+        .orbit-9 { width: min(150vw, 1500px); height: min(150vw, 1500px); }
 
         /* 行星 */
         .planet {
@@ -451,6 +452,7 @@
         <div class="orbit orbit-6"></div>
         <div class="orbit orbit-7"></div>
         <div class="orbit orbit-8"></div>
+        <div class="orbit orbit-9"></div>
     </div>
 
     <!-- 行星 - 9个智能体 -->
@@ -533,6 +535,11 @@
         <span class="number-badge">14</span>
         <span class="planet-name">神思AirEye</span>
     </a>
+    <a href="https://ptvoice.shensist.top/" target="_blank" class="planet rotating" data-number="15"
+       style="--orbit-radius: min(82.5vw, 825px); --orbit-duration: 80s; background: #00ff41; color: #000; left: 50%; top: 50%; animation-delay: -27s; border: 2px solid #fff;">
+        <span class="number-badge">15</span>
+        <span class="planet-name">PTVoice Pro</span>
+    </a>
 
     <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
     <div class="bottom-container">
@@ -546,10 +553,10 @@
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
             <div class="command-text" id="commandDisplay">
-                点击页面 或 说数字1-14
+                点击页面 或 说数字1-15
             </div>
             <div class="voice-hint">
-                🎤 说数字 1-14 打开
+                🎤 说数字 1-15 打开
             </div>
         </div>
 
@@ -676,7 +683,7 @@
                     micDot.className = 'mic-dot';
                     micStatus.innerText = '语音开启';
                     startWave();
-                    commandDisplay.innerText = '说数字 1-14';
+                    commandDisplay.innerText = '说数字 1-15';
                 };
                 
                 recognition.onresult = (event) => {
@@ -706,7 +713,7 @@
                         stopWave();
                         micDot.className = 'mic-dot off';
                         micStatus.innerText = '语音关闭';
-                        commandDisplay.innerText = '点击页面 或 说数字 1-14';
+                        commandDisplay.innerText = '点击页面 或 说数字 1-15';
                     }
                 };
                 
