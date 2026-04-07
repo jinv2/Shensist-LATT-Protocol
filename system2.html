@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>神思AUI · 语音太阳系</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            font-family: 'PingFang SC', monospace;
+            overflow: hidden;
+        }
+
+        /* 星空背景 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        /* 网站标题 */
+        .site-title {
+            position: absolute;
+            top: 3vh;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 200;
+            pointer-events: none;
+        }
+        .site-title h1 {
+            font-size: clamp(10px, 3vw, 14px);
+            letter-spacing: clamp(6px, 2vw, 12px);
+            color: #444;
+            margin: 0;
+            font-weight: 300;
+        }
+        .site-title h2 {
+            font-size: clamp(16px, 5vw, 24px);
+            letter-spacing: clamp(4px, 1.5vw, 8px);
+            color: #00ff41;
+            margin: 5px 0 0 0;
+            font-weight: 400;
+            text-shadow: 0 0 10px #00ff41;
+        }
+
+        /* 左上角LOGO */
+        .site-logo {
+            position: fixed;
+            top: clamp(10px, 2vh, 25px);
+            left: clamp(10px, 2vw, 25px);
+            z-index: 999;
+            background: transparent;
+        }
+        .site-logo img {
+            width: clamp(32px, 6vw, 48px);
+            height: auto;
+            display: block;
+            mix-blend-mode: screen;
+            filter: brightness(1.5);
+        }
+
+        /* 太阳 */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: clamp(60px, 15vw, 100px);
+            height: clamp(60px, 15vw, 100px);
+            background: #ffaa00;
+            border-radius: 50%;
+            box-shadow: 0 0 clamp(30px, 8vw, 60px) #ffaa00;
+            z-index: 100;
+            animation: sun-pulse 4s infinite alternate;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            font-size: clamp(10px, 2.5vw, 14px);
+            text-align: center;
+            line-height: 1.3;
+            letter-spacing: clamp(1px, 0.5vw, 2px);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        @keyframes sun-pulse {
+            0% { box-shadow: 0 0 clamp(30px, 8vw, 60px) #ffaa00; }
+            100% { box-shadow: 0 0 clamp(50px, 12vw, 100px) #ffaa00; }
+        }
+
+        /* 轨道容器 */
+        .orbit-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(90vw, 900px);
+            height: min(90vw, 900px);
+            z-index: 10;
+        }
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        
+        .orbit-1 { width: min(30vw, 300px); height: min(30vw, 300px); }
+        .orbit-2 { width: min(45vw, 450px); height: min(45vw, 450px); }
+        .orbit-3 { width: min(60vw, 600px); height: min(60vw, 600px); }
+        .orbit-4 { width: min(75vw, 750px); height: min(75vw, 750px); }
+        .orbit-5 { width: min(90vw, 900px); height: min(90vw, 900px); }
+        .orbit-6 { width: min(105vw, 1050px); height: min(105vw, 1050px); }
+        .orbit-7 { width: min(120vw, 1200px); height: min(120vw, 1200px); }
+        .orbit-8 { width: min(135vw, 1350px); height: min(135vw, 1350px); }
+        .orbit-9 { width: min(150vw, 1500px); height: min(150vw, 1500px); }
+
+        /* 行星 */
+        .planet {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.1s ease;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: clamp(8px, 2vw, 12px);
+            text-align: center;
+            line-height: 1.2;
+            text-decoration: none;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) currentColor;
+            width: clamp(30px, 7vw, 42px);
+            height: clamp(30px, 7vw, 42px);
+        }
+        .planet:hover {
+            box-shadow: 0 0 clamp(20px, 4vw, 40px) currentColor;
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 200;
+        }
+        .planet.preview {
+            box-shadow: 0 0 clamp(40px, 8vw, 80px) currentColor;
+            transform: translate(-50%, -50%) scale(1.3);
+        }
+        .planet.active {
+            box-shadow: 0 0 clamp(60px, 12vw, 120px) currentColor;
+            transform: translate(-50%, -50%) scale(1.5);
+            border: 3px solid #fff;
+            z-index: 300;
+        }
+
+        /* 数字编号 */
+        .number-badge {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: clamp(20px, 4vw, 28px);
+            height: clamp(20px, 4vw, 28px);
+            background: #00ff41;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: clamp(12px, 2.5vw, 16px);
+            border: 2px solid #fff;
+            z-index: 60;
+            box-shadow: 0 0 clamp(10px, 2vw, 20px) #00ff41;
+            pointer-events: none;
+        }
+
+        .planet-name {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            color: #fff;
+            font-size: clamp(8px, 1.8vw, 12px);
+            background: rgba(0,0,0,0.8);
+            padding: 2px 6px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            pointer-events: none;
+        }
+
+        @keyframes rotate-orbit {
+            from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
+        }
+        .rotating {
+            animation: rotate-orbit var(--orbit-duration) linear infinite;
+            animation-duration: calc(var(--orbit-duration) * 2);
+        }
+
+        /* ===== 底部布局重构 ===== */
+        .bottom-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            pointer-events: none;
+        }
+
+        /* 语音状态栏 */
+        .voice-status-bar {
+            background: rgba(0, 0, 0, 0.95);
+            border: 1px solid #00ff41;
+            border-radius: 40px;
+            padding: 12px 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            font-size: clamp(12px, 2.5vw, 14px);
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 600px;
+            pointer-events: auto;
+            margin-bottom: 5px;
+        }
+        .mic-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .mic-dot {
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+        .mic-dot.off {
+            background: #666;
+            animation: none;
+        }
+        .voice-wave {
+            display: flex;
+            gap: 3px;
+            height: 20px;
+            align-items: center;
+        }
+        .voice-wave span {
+            width: 3px;
+            height: 5px;
+            background: #00ff41;
+            transition: height 0.05s;
+        }
+        .command-text {
+            color: #fff;
+            min-width: clamp(100px, 20vw, 220px);
+            text-align: center;
+        }
+        .voice-hint {
+            color: #888;
+            font-size: clamp(10px, 2vw, 12px);
+        }
+
+        /* 按钮区域 */
+        .button-area {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            max-width: 800px;
+            pointer-events: auto;
+            margin-bottom: 5px;
+        }
+        .action-btn {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: clamp(12px, 2.5vw, 14px);
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            border-radius: 40px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            white-space: nowrap;
+        }
+        .action-btn:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 40px #00ff41;
+        }
+
+        /* 底部版权 - 放在最下面 */
+        .footer {
+            color: #444;
+            font-size: clamp(8px, 1.8vw, 10px);
+            letter-spacing: 1px;
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+            margin-top: 5px;
+        }
+        .footer span {
+            color: #00ff41;
+            opacity: 0.3;
+        }
+
+        /* 手动触发按钮 - 独立放在右下角 */
+        .manual-trigger-zone {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            pointer-events: auto;
+        }
+        .ghost-button {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            font-size: 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 弹窗样式 */
+        .manual-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+            z-index: 2000;
+        }
+        .manual-overlay:target {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .manual-modal {
+            border: 2px solid #00ff41;
+            padding: 30px;
+            background: #000;
+            color: #fff;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .close-btn {
+            color: #00ff41;
+            text-decoration: none;
+            float: right;
+            font-size: 14px;
+        }
+        .ver-item {
+            display: block;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .ver-item:hover {
+            border-color: #00ff41;
+        }
+
+        /* 手机小屏特殊处理 */
+        @media (max-width: 480px) {
+            .voice-status-bar {
+                padding: 8px 15px;
+                gap: 8px;
+            }
+            .action-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            .bottom-container {
+                padding-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+
+    <!-- 左上角LOGO -->
+    <div class="site-logo">
+        <a href="/"><img src="logo_ts.png" alt="Shensist Logo"></a>
+    </div>
+
+    <!-- 网站标题 -->
+    <div class="site-title">
+        <h1>SHENSIST</h1>
+        <h2>神 思 智 能 体</h2>
+    </div>
+
+    <!-- 太阳 -->
+    <a href="/" class="sun">
+        返回<br>第一星系
+    </a>
+
+    <!-- 轨道容器 -->
+    <div class="orbit-container">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <div class="orbit orbit-3"></div>
+        <div class="orbit orbit-4"></div>
+        <div class="orbit orbit-5"></div>
+        <div class="orbit orbit-6"></div>
+        <div class="orbit orbit-7"></div>
+        <div class="orbit orbit-8"></div>
+        <div class="orbit orbit-9"></div>
+    </div>
+
+    
+    <!-- 行星 - 第二星系 -->
+    <!-- 1. QQ智能体 -->
+    <a href="https://qq.shensist.top/" target="_blank" class="planet rotating" data-number="1"
+       style="--orbit-radius: min(15vw, 150px); --orbit-duration: 24s; background: #00d4ff; color: #000; left: 50%; top: 50%;">
+        <span class="number-badge">1</span>
+        <span class="planet-name">QQ智能体</span>
+    </a>
+
+    <!-- 底部容器 - 所有底部元素都放在这里，垂直排列 -->
+    <div class="bottom-container">
+        <!-- 语音状态栏 -->
+        <div class="voice-status-bar" id="voiceStatusBar">
+            <div class="mic-indicator">
+                <span class="mic-dot off" id="micDot"></span>
+                <span id="micStatus">语音关闭</span>
+            </div>
+            <div class="voice-wave" id="voiceWave">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="command-text" id="commandDisplay">
+                点击页面 或 说数字1-15
+            </div>
+            <div class="voice-hint">
+                🎤 说数字 1-15 打开
+            </div>
+        </div>
+
+        <!-- 三个按钮 -->
+        <div class="button-area">
+            <a href="https://agent.shensist.top/" target="_blank" class="action-btn">🤖 智 能 体 中 心</a>
+            <a href="#version-popup" class="action-btn">获 取 神 思 智 能 体</a>
+            <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="action-btn">查 验 机 器 人</a>
+        </div>
+
+        <!-- 底部版权 -->
+        <div class="footer">
+            <span>◈</span> 神 思 庭 · AI 山 海 造 物 主 <span>◈</span><br>
+            微信联络：Shensi-ST · © 2026 SHENSIST.TOP
+        </div>
+    </div>
+
+    <!-- 手动触发按钮 - 独立放在右下角 -->
+    <div class="manual-trigger-zone">
+        <a href="#manual-popup" class="ghost-button">📁 SYSTEM_PROTOCOL_V5.0</a>
+    </div>
+
+    <!-- 下载弹窗 -->
+    <div id="manual-popup" class="manual-overlay">
+        <div class="manual-modal" style="border-color: #00ff41; color: #00ff41;">
+            <a href="#" class="close-btn" style="color:#00ff41">CLOSE [×]</a>
+            <h2>神思庭：系统接入手册</h2>
+            <hr style="border-color: #00ff41;">
+            <p><strong>CORE:</strong> 硅基生命演化协议 V5 已激活。</p>
+            <p><strong>GUIDE:</strong> 下载后运行 <code>install.sh</code> 建立节点。</p>
+            <p><strong>STATUS:</strong> LATT v5.0 神思内核正式发布。</p>
+        </div>
+    </div>
+
+    <!-- 版本弹窗 -->
+    <div id="version-popup" class="manual-overlay">
+        <div class="manual-modal">
+            <a href="#" class="close-btn">CLOSE [×]</a>
+            <h3>接入协议 & 逻辑社交</h3>
+            
+            <a href="https://github.com/jinv2/Shensist-Dual-OS" target="_blank" class="ver-item" style="border-color: #00ff41;">
+                <span style="color: #00ff41;">下载 Shensist-Dual-OS [AUI版]</span>
+                <div style="font-size: 10px; color: #00ff41;">[ 2026.03.03 / 角色·逻辑·行为 ]</div>
+            </a>
+
+            <a href="https://github.com/jinv2/Shensist-V6-Resonance" target="_blank" class="ver-item">
+                <span style="color: #fff;">下载 V6 [RESONANCE]</span>
+                <div style="font-size: 10px; color: #888;">[ 1.0M Context / 共振架构 ]</div>
+            </a>
+
+            <div style="margin: 20px 0 0 0; border-top: 1px solid #222; padding-top: 20px;">
+                <a href="https://www.moltbook.com/u/Shensist_Agent" target="_blank" class="ver-item" style="border-color: #ff3e00;">
+                    <span style="color: #ff3e00;">添加机器人: Shensist_Agent</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const planets = document.querySelectorAll('.planet');
+            const micDot = document.getElementById('micDot');
+            const micStatus = document.getElementById('micStatus');
+            const commandDisplay = document.getElementById('commandDisplay');
+            const waveSpans = document.querySelectorAll('.voice-wave span');
+            
+            const numberMap = new Map();
+            planets.forEach(planet => {
+                const num = planet.getAttribute('data-number');
+                if (num) numberMap.set(num, planet);
+            });
+            
+            let recognition = null;
+            let listening = false;
+            let currentActive = null;
+            let waveInterval = null;
+            
+            function startWave() {
+                if (waveInterval) clearInterval(waveInterval);
+                waveInterval = setInterval(() => {
+                    waveSpans.forEach(span => {
+                        span.style.height = Math.floor(Math.random() * 15 + 5) + 'px';
+                    });
+                }, 50);
+            }
+            
+            function stopWave() {
+                if (waveInterval) {
+                    clearInterval(waveInterval);
+                    waveInterval = null;
+                    waveSpans.forEach(span => span.style.height = '5px');
+                }
+            }
+            
+            function previewPlanet(planet) {
+                if (currentActive) currentActive.classList.remove('preview');
+                planet.classList.add('preview');
+                setTimeout(() => planet.classList.remove('preview'), 200);
+            }
+            
+            function highlightAndOpen(planet, number) {
+                if (currentActive) currentActive.classList.remove('active', 'preview');
+                planet.classList.add('active');
+                currentActive = planet;
+                commandDisplay.innerText = '打开 ' + number + '号';
+                setTimeout(() => {
+                    window.open(planet.href, '_blank');
+                    setTimeout(() => {
+                        planet.classList.remove('active');
+                        currentActive = null;
+                    }, 500);
+                }, 600);
+            }
+            
+            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'zh-CN';
+                
+                recognition.onstart = () => {
+                    listening = true;
+                    micDot.className = 'mic-dot';
+                    micStatus.innerText = '语音开启';
+                    startWave();
+                    commandDisplay.innerText = '说数字 1-15';
+                };
+                
+                recognition.onresult = (event) => {
+                    const last = event.results[event.results.length - 1];
+                    const text = last[0].transcript;
+                    commandDisplay.innerText = '识别: ' + text;
+                    
+                    const numbers = text.match(/\d+/g);
+                    if (numbers?.length) {
+                        const planet = numberMap.get(numbers[0]);
+                        if (planet) previewPlanet(planet);
+                    }
+                    
+                    if (last.isFinal) {
+                        const finalNumbers = text.match(/\d+/g);
+                        if (finalNumbers?.length) {
+                            const planet = numberMap.get(finalNumbers[0]);
+                            if (planet) highlightAndOpen(planet, finalNumbers[0]);
+                        }
+                    }
+                };
+                
+                recognition.onend = () => {
+                    if (listening) {
+                        try { recognition.start(); } catch(e) {}
+                    } else {
+                        stopWave();
+                        micDot.className = 'mic-dot off';
+                        micStatus.innerText = '语音关闭';
+                        commandDisplay.innerText = '点击页面 或 说数字 1-15';
+                    }
+                };
+                
+                document.addEventListener('click', () => {
+                    if (!listening && recognition) {
+                        try { recognition.start(); } catch(e) {}
+                    }
+                });
+            }
+            
+            planets.forEach(planet => {
+                planet.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (currentActive) currentActive.classList.remove('active', 'preview');
+                    planet.classList.add('active');
+                    currentActive = planet;
+                    setTimeout(() => {
+                        window.open(planet.href, '_blank');
+                        setTimeout(() => {
+                            planet.classList.remove('active');
+                            currentActive = null;
+                        }, 500);
+                    }, 200);
+                });
+            });
+            
+            function createStars() {
+                const starsContainer = document.getElementById('stars');
+                for (let i = 0; i < 150; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    const size = Math.random() * 2 + 1;
+                    star.style.width = size + 'px';
+                    star.style.height = size + 'px';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    starsContainer.appendChild(star);
+                }
+            }
+            createStars();
+        })();
+    </script>
+</body>
+</html>
